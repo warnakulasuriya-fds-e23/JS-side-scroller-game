@@ -10,6 +10,15 @@ selection.addEventListener("change", (event) => {
   playerState = event.target.value;
 });
 
+let RunAnimation = false;
+const StopRunBtn = document.getElementById("stopRunButton");
+StopRunBtn.addEventListener("click", () => {
+  RunAnimation = !RunAnimation;
+  if (RunAnimation) {
+    animate();
+  }
+});
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const image = new Image();
@@ -41,7 +50,5 @@ function animate() {
   );
   gameframes++;
   var animation = requestAnimationFrame(animate);
-  // if (cancelAnimation) window.cancelAnimationFrame(animation);
+  if (!RunAnimation) window.cancelAnimationFrame(animation);
 }
-
-animate();
