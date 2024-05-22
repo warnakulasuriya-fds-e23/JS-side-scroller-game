@@ -23,9 +23,9 @@ const staggerFrame = 5;
 //following is the animation function
 function animate() {
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  let totFramesForPlayerState = spriteAnimations[playerState].location.length;
   let position =
-    Math.floor(gameframes / staggerFrame) %
-    spriteAnimations[playerState].location.length;
+    Math.floor(gameframes / staggerFrame) % totFramesForPlayerState;
   let framex = spriteAnimations[playerState].location[position].X;
   let framey = spriteAnimations[playerState].location[position].Y;
   ctx.drawImage(
