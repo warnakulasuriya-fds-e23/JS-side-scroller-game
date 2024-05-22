@@ -22,7 +22,7 @@ StopRunBtn.addEventListener("click", () => {
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const image = new Image();
-image.src = "Assets/Images/SpriteSheet/shadow_dog.png";
+image.src = "./../Assets/Images/SpriteSheet/shadow_dog.png";
 const CANVAS_WIDTH = (canvas.width = 600);
 const CANVAS_HEIGHT = (canvas.height = 600);
 
