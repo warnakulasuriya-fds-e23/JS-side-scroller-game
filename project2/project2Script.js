@@ -10,12 +10,15 @@ const backgroundLayer3 = new Image();
 const backgroundLayer4 = new Image();
 const backgroundLayer5 = new Image();
 
-backgroundLayer1.src = "./../Assets/Images/SpriteSheet/shadow_dog.png";
-console.log(backgroundLayer1);
-// ctxProj2.drawImage(backgroundLayer1, 0, 0);
+backgroundLayer1.src = "./../Assets/Images/backgroundLayers/layer-1.png";
+backgroundLayer2.src = "./../Assets/Images/backgroundLayers/layer-2.png";
+backgroundLayer3.src = "./../Assets/Images/backgroundLayers/layer-3.png";
+backgroundLayer4.src = "./../Assets/Images/backgroundLayers/layer-4.png";
+backgroundLayer5.src = "./../Assets/Images/backgroundLayers/layer-5.png";
 
-function drawing() {
-  ctxProj2.fillRect(130, 190, 40, 60);
+function animateProj2() {
+  ctxProj2.drawImage(backgroundLayer1, 0, 0);
+  requestAnimationFrame(animateProj2);
 }
 
-drawing();
+animateProj2();
