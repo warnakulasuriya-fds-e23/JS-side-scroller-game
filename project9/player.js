@@ -1,4 +1,3 @@
-import { Sitting, Running, Jumping, Falling, Idling } from "./playerStates.js";
 import { Movement } from "./Movement.js";
 import { SpriteSheetAnimations } from "./spriteSheetAnimation.js";
 import { PlayerStateController } from "./PlayerStateController.js";
@@ -9,7 +8,7 @@ export class Player {
     this.height = 91.3;
     this.x = 0;
     this.y = this.game.height - this.height;
-    this.image = document.getElementById("player");
+    this.spriteSheet = document.getElementById("player");
     this.movement = new Movement();
     this.SpriteAnimations = new SpriteSheetAnimations(this);
     this.playerStateController = new PlayerStateController(this);
@@ -22,13 +21,11 @@ export class Player {
 
     //MOVEMENT HANDLING
     this.movement.MotionHandling(this, pressedDownKeys);
-
-    console.log("Player Update");
   }
 
   draw(context) {
     context.drawImage(
-      this.image,
+      this.spriteSheet,
       this.SpriteAnimations.frameX * this.width,
       this.SpriteAnimations.frameY * this.height,
       this.width,
