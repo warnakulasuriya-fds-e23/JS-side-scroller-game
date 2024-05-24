@@ -18,7 +18,7 @@ export class Sitting extends State {
     this.player = player;
   }
   activate() {
-    this.player.SpriteAnimations.frameY = 5;
+    this.player.playerSpriteAnimations.frameY = 5;
   }
   handleKeyBoardInput(pressedDownKeys) {
     if (
@@ -41,7 +41,7 @@ export class Running extends State {
     this.player = player;
   }
   activate() {
-    this.player.SpriteAnimations.frameY = 3;
+    this.player.playerSpriteAnimations.frameY = 3;
   }
   handleKeyBoardInput(pressedDownKeys) {
     if (pressedDownKeys.includes("ArrowDown")) {
@@ -60,7 +60,7 @@ export class Jumping extends State {
     this.player = player;
   }
   activate() {
-    this.player.SpriteAnimations.frameY = 1;
+    this.player.playerSpriteAnimations.frameY = 1;
   }
   handleKeyBoardInput(pressedDownKeys) {
     if (this.player.movement.yVelocity == 0) {
@@ -75,7 +75,7 @@ export class Falling extends State {
     this.player = player;
   }
   activate() {
-    this.player.SpriteAnimations.frameY = 2;
+    this.player.playerSpriteAnimations.frameY = 2;
   }
   handleKeyBoardInput(pressedDownKeys) {
     if (this.player.onGround()) {
@@ -99,7 +99,7 @@ export class Idling extends State {
     this.player = player;
   }
   activate() {
-    this.player.SpriteAnimations.frameY = 0;
+    this.player.playerSpriteAnimations.frameY = 0;
   }
   handleKeyBoardInput(pressedDownKeys) {
     if (

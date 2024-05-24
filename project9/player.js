@@ -1,5 +1,5 @@
 import { Movement } from "./Movement.js";
-import { SpriteSheetAnimations } from "./spriteSheetAnimation.js";
+import { PlayerSpriteSheetAnimations } from "./playerSpriteSheetAnimation.js";
 import { PlayerStateController } from "./PlayerStateController.js";
 export class Player {
   constructor(game) {
@@ -10,10 +10,10 @@ export class Player {
     this.y = this.game.height - this.height;
     this.spriteSheet = document.getElementById("player");
     this.movement = new Movement();
-    this.SpriteAnimations = new SpriteSheetAnimations(this);
+    this.playerSpriteAnimations = new PlayerSpriteSheetAnimations(this);
     this.playerStateController = new PlayerStateController(this);
   }
-  update(pressedDownKeys) {
+  update(pressedDownKeys, deltaTime) {
     //STATE HANDING
     this.playerStateController.currentState.handleKeyBoardInput(
       pressedDownKeys
@@ -21,13 +21,19 @@ export class Player {
 
     //MOVEMENT HANDLING
     this.movement.MotionHandling(this, pressedDownKeys);
+
+    //sprite animation
+    this.playerSpriteAnimations.deltaTime = deltaTime;
+    this.playerSpriteAnimations.playerState =
+      this.playerStateController.currentState.state;
+    this.playerSpriteAnimations.animate();
   }
 
   draw(context) {
     context.drawImage(
       this.spriteSheet,
-      this.SpriteAnimations.frameX * this.width,
-      this.SpriteAnimations.frameY * this.height,
+      this.playerSpriteAnimations.frameX * this.width,
+      this.playerSpriteAnimations.frameY * this.height,
       this.width,
       this.height,
       this.x,

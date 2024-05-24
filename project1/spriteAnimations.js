@@ -79,5 +79,5 @@ AllPossibleAnimationStates.forEach((state, index) => {
   }
   spriteAnimations[state.name] = frameCollection;
 });
-
+console.log(spriteAnimations);
 export { spriteAnimations, spriteWidth, spriteHeight };
