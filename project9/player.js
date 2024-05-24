@@ -7,7 +7,7 @@ export class Player {
     this.width = 100;
     this.height = 91.3;
     this.x = 0;
-    this.y = this.game.height - this.height;
+    this.y = this.game.height - this.height - this.game.groundMargin;
     this.spriteSheet = document.getElementById("player");
     this.movement = new Movement();
     this.playerSpriteAnimations = new PlayerSpriteSheetAnimations(this);
@@ -46,6 +46,6 @@ export class Player {
   onGround() {
     //returns true if player is on ground
     //(might look a bit weird but thats cuz we're dealing wiht an inverted y axis)
-    return this.y >= this.game.height - this.height;
+    return this.y >= this.game.height - this.height - this.game.groundMargin;
   }
 }
