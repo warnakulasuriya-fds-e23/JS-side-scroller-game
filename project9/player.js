@@ -1,6 +1,7 @@
-import { Sitting, Running, Jumping, Falling, Idling } from "./playerState.js";
+import { Sitting, Running, Jumping, Falling, Idling } from "./playerStates.js";
 import { Movement } from "./Movement.js";
 import { SpriteSheetAnimations } from "./spriteSheetAnimation.js";
+import { PlayerStateController } from "./PlayerStateController.js";
 export class Player {
   constructor(game) {
     this.game = game;
@@ -11,19 +12,13 @@ export class Player {
     this.image = document.getElementById("player");
     this.movement = new Movement();
     this.SpriteAnimations = new SpriteSheetAnimations(this);
-    this.states = [
-      new Sitting(this),
-      new Running(this),
-      new Jumping(this),
-      new Falling(this),
-      new Idling(this),
-    ];
-    this.currentState = this.states[0];
-    this.currentState.activate();
+    this.playerStateController = new PlayerStateController(this);
   }
   update(pressedDownKeys) {
     //STATE HANDING
-    this.currentState.handleKeyBoardInput(pressedDownKeys);
+    this.playerStateController.currentState.handleKeyBoardInput(
+      pressedDownKeys
+    );
 
     //MOVEMENT HANDLING
     this.movement.MotionHandling(this, pressedDownKeys);
@@ -49,10 +44,5 @@ export class Player {
     //returns true if player is on ground
     //(might look a bit weird but thats cuz we're dealing wiht an inverted y axis)
     return this.y >= this.game.height - this.height;
-  }
-
-  setState(stateNum) {
-    this.currentState = this.states[stateNum];
-    this.currentState.activate();
   }
 }

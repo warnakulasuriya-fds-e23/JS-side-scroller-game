@@ -26,11 +26,11 @@ export class Sitting extends State {
         pressedDownKeys.includes("ArrowRight")) &&
       !pressedDownKeys.includes("ArrowDown")
     ) {
-      this.player.setState(stateNums.RUNNING);
+      this.player.playerStateController.setState(stateNums.RUNNING);
     } else if (pressedDownKeys.includes("ArrowUp")) {
-      this.player.setState(stateNums.JUMPING);
+      this.player.playerStateController.setState(stateNums.JUMPING);
     } else if (pressedDownKeys.length == 0) {
-      this.player.setState(stateNums.IDLING);
+      this.player.playerStateController.setState(stateNums.IDLING);
     }
   }
 }
@@ -45,11 +45,11 @@ export class Running extends State {
   }
   handleKeyBoardInput(pressedDownKeys) {
     if (pressedDownKeys.includes("ArrowDown")) {
-      this.player.setState(stateNums.SITTING);
+      this.player.playerStateController.setState(stateNums.SITTING);
     } else if (pressedDownKeys.includes("ArrowUp")) {
-      this.player.setState(stateNums.JUMPING);
+      this.player.playerStateController.setState(stateNums.JUMPING);
     } else if (pressedDownKeys.length == 0) {
-      this.player.setState(stateNums.IDLING);
+      this.player.playerStateController.setState(stateNums.IDLING);
     }
   }
 }
@@ -64,7 +64,7 @@ export class Jumping extends State {
   }
   handleKeyBoardInput(pressedDownKeys) {
     if (this.player.movement.yVelocity == 0) {
-      this.player.setState(stateNums.FALLING);
+      this.player.playerStateController.setState(stateNums.FALLING);
     }
   }
 }
@@ -83,11 +83,11 @@ export class Falling extends State {
         pressedDownKeys.includes("ArrowLeft") ||
         pressedDownKeys.includes("ArrowRight")
       ) {
-        this.player.setState(stateNums.RUNNING);
+        this.player.playerStateController.setState(stateNums.RUNNING);
       } else if (pressedDownKeys.includes("ArrowDown")) {
-        this.player.setState(stateNums.SITTING);
+        this.player.playerStateController.setState(stateNums.SITTING);
       } else {
-        this.player.setState(stateNums.IDLING);
+        this.player.playerStateController.setState(stateNums.IDLING);
       }
     }
   }
@@ -106,11 +106,11 @@ export class Idling extends State {
       pressedDownKeys.includes("ArrowLeft") ||
       pressedDownKeys.includes("ArrowRight")
     ) {
-      this.player.setState(stateNums.RUNNING);
+      this.player.playerStateController.setState(stateNums.RUNNING);
     } else if (pressedDownKeys.includes("ArrowDown")) {
-      this.player.setState(stateNums.SITTING);
+      this.player.playerStateController.setState(stateNums.SITTING);
     } else if (pressedDownKeys.includes("ArrowUp")) {
-      this.player.setState(stateNums.JUMPING);
+      this.player.playerStateController.setState(stateNums.JUMPING);
     }
   }
 }
