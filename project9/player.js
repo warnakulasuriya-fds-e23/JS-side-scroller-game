@@ -1,6 +1,6 @@
 import { Sitting, Running, Jumping, Falling, Idling } from "./playerState.js";
-import { MotionHandling } from "./Movement.js";
-
+import { Movement } from "./Movement.js";
+import { SpriteSheetAnimations } from "./spriteSheetAnimation.js";
 export class Player {
   constructor(game) {
     this.game = game;
@@ -9,11 +9,13 @@ export class Player {
     this.x = 0;
     this.y = this.game.height - this.height;
     this.image = document.getElementById("player");
-    this.xVelocity = 0;
-    this.max_xVelocity = 10;
-    this.yVelocity = 0;
-    this.max_yVelocity = 10;
-    this.g = 1; //graviational acceleration
+    // this.xVelocity = 0;
+    // this.max_xVelocity = 10;
+    // this.yVelocity = 0;
+    // this.max_yVelocity = 10;
+    // this.g = 1; //graviational acceleration
+    this.movement = new Movement();
+    this.SpriteAnimations = new SpriteSheetAnimations(this);
     this.states = [
       new Sitting(this),
       new Running(this),
@@ -23,22 +25,22 @@ export class Player {
     ];
     this.currentState = this.states[0];
     this.currentState.activate();
-    this.frameX = 0; //x poisiton of selected sprite (top left corner point of sprite box)
-    this.frameY = 0; //y position of selected sprite (top "" "")
   }
   update(pressedDownKeys) {
     //STATE HANDING
     this.currentState.handleKeyBoardInput(pressedDownKeys);
 
     //MOVEMENT HANDLING
-    MotionHandling(this, pressedDownKeys);
+    this.movement.MotionHandling(this, pressedDownKeys);
+
+    console.log("Player Update");
   }
 
   draw(context) {
     context.drawImage(
       this.image,
-      this.frameX * this.width,
-      this.frameY * this.height,
+      this.SpriteAnimations.frameX * this.width,
+      this.SpriteAnimations.frameY * this.height,
       this.width,
       this.height,
       this.x,
