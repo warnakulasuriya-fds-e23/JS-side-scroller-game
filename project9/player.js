@@ -1,5 +1,5 @@
 import { Sitting, Running, Jumping, Falling, Idling } from "./playerState.js";
-import { horizontalMotion, verticalMotion } from "./Movement.js";
+import { MotionHandling } from "./Movement.js";
 
 export class Player {
   constructor(game) {
@@ -31,8 +31,7 @@ export class Player {
     this.currentState.handleKeyBoardInput(pressedDownKeys);
 
     //MOVEMENT HANDLING
-    horizontalMotion(this, pressedDownKeys);
-    verticalMotion(this, pressedDownKeys);
+    MotionHandling(this, pressedDownKeys);
   }
 
   draw(context) {
