@@ -7,4 +7,5 @@ export class KeyBoardConfiguration {
       CROUCH: "ArrowDown",
     };
   }
+  //implement setters to configure buttons for relevant key press
 }
