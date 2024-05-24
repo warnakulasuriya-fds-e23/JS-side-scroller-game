@@ -63,7 +63,7 @@ export class Jumping extends State {
     this.player.SpriteAnimations.frameY = 1;
   }
   handleKeyBoardInput(pressedDownKeys) {
-    if (this.player.yVelocity == 0) {
+    if (this.player.movement.yVelocity == 0) {
       this.player.setState(stateNums.FALLING);
     }
   }

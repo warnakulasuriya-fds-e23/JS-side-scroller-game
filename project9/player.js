@@ -9,11 +9,6 @@ export class Player {
     this.x = 0;
     this.y = this.game.height - this.height;
     this.image = document.getElementById("player");
-    // this.xVelocity = 0;
-    // this.max_xVelocity = 10;
-    // this.yVelocity = 0;
-    // this.max_yVelocity = 10;
-    // this.g = 1; //graviational acceleration
     this.movement = new Movement();
     this.SpriteAnimations = new SpriteSheetAnimations(this);
     this.states = [
