@@ -7,13 +7,13 @@ export class Movement {
     this.g = 1; //graviational acceleration
   }
   horizontalMotion(player, pressedDownKeys) {
-    player.x += player.xVelocity; //motion along x axis
+    player.x += this.xVelocity; //motion along x axis
     if (pressedDownKeys.includes("ArrowRight")) {
-      player.xVelocity = player.max_xVelocity;
+      this.xVelocity = this.max_xVelocity;
     } else if (pressedDownKeys.includes("ArrowLeft")) {
-      player.xVelocity = -player.max_xVelocity;
+      this.xVelocity = -this.max_xVelocity;
     } else {
-      player.xVelocity = 0;
+      this.xVelocity = 0;
     }
 
     if (player.x < 0) {
@@ -28,11 +28,11 @@ export class Movement {
   //PLEASE NOTE!! : here we are dealing with an inverted y-axis
   verticalMotion(player, pressedDownKeys) {
     if (pressedDownKeys.includes("ArrowUp") && player.onGround())
-      player.yVelocity = -30;
-    player.y += player.yVelocity; //motion along y axis
+      this.yVelocity = -30;
+    player.y += this.yVelocity; //motion along y axis
     if (!player.onGround()) {
-      player.yVelocity += player.g; //the is deceleration taking place (the g is added and not subtracted because y axis is inverted)
-    } else player.yVelocity = 0; //final velocity (stops player from falling throught the floor)
+      this.yVelocity += this.g; //the is deceleration taking place (the g is added and not subtracted because y axis is inverted)
+    } else this.yVelocity = 0; //final velocity (stops player from falling throught the floor)
   }
 
   MotionHandling(player, pressedDownKeys) {
