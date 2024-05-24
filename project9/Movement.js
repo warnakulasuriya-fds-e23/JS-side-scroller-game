@@ -1,7 +1,7 @@
 export class Movement {
   constructor(game) {
     this.game = game;
-    // this.setKeys = this.game.keyboardConfig.setKeys;
+    this.keySettings = game.keyboardConfig.keySettings;
     this.xVelocity = 0;
     this.max_xVelocity = 10;
     this.yVelocity = 0;
@@ -11,13 +11,13 @@ export class Movement {
   horizontalMotion(player, pressedDownKeys) {
     player.x += this.xVelocity; //motion along x axis
     if (
-      pressedDownKeys.includes("ArrowRight") &&
-      !pressedDownKeys.includes("ArrowDown")
+      pressedDownKeys.includes(this.keySettings["FORWARD"]) &&
+      !pressedDownKeys.includes(this.keySettings["CROUCH"])
     ) {
       this.xVelocity = this.max_xVelocity;
     } else if (
-      pressedDownKeys.includes("ArrowLeft") &&
-      !pressedDownKeys.includes("ArrowDown")
+      pressedDownKeys.includes(this.keySettings["BACKWARD"]) &&
+      !pressedDownKeys.includes(this.keySettings["CROUCH"])
     ) {
       this.xVelocity = -this.max_xVelocity;
     } else {
@@ -35,7 +35,7 @@ export class Movement {
 
   //PLEASE NOTE!! : here we are dealing with an inverted y-axis
   verticalMotion(player, pressedDownKeys) {
-    if (pressedDownKeys.includes("ArrowUp") && player.onGround())
+    if (pressedDownKeys.includes(this.keySettings["JUMP"]) && player.onGround())
       this.yVelocity = -30;
     player.y += this.yVelocity; //motion along y axis
     if (!player.onGround()) {

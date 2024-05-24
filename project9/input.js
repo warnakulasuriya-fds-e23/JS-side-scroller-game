@@ -3,21 +3,11 @@ export class InputHandler {
     this.game = game;
     this.keys = [];
     window.addEventListener("keydown", (e) => {
-      // if (
-      //   (e.key == "ArrowUp" ||
-      //     e.key == "ArrowDown" ||
-      //     e.key == "ArrowLeft" ||
-      //     e.key == "ArrowRight") &&
-      //   this.keys.indexOf(e.key) == -1
-      // ) {
-      //   this.keys.push(e.key);
-      // }
-
       if (
-        (e.key == this.game.keyboardConfig.setKeys["JUMP"] ||
-          e.key == this.game.keyboardConfig.setKeys["CROUCH"] ||
-          e.key == this.game.keyboardConfig.setKeys["BACKWARD"] ||
-          e.key == this.game.keyboardConfig.setKeys["FORWARD"]) &&
+        (e.key == this.game.keyboardConfig.keySettings["JUMP"] ||
+          e.key == this.game.keyboardConfig.keySettings["CROUCH"] ||
+          e.key == this.game.keyboardConfig.keySettings["BACKWARD"] ||
+          e.key == this.game.keyboardConfig.keySettings["FORWARD"]) &&
         this.keys.indexOf(e.key) == -1
       ) {
         this.keys.push(e.key);
@@ -25,10 +15,10 @@ export class InputHandler {
     });
     window.addEventListener("keyup", (e) => {
       if (
-        e.key == this.game.keyboardConfig.setKeys["JUMP"] ||
-        e.key == this.game.keyboardConfig.setKeys["CROUCH"] ||
-        e.key == this.game.keyboardConfig.setKeys["BACKWARD"] ||
-        e.key == this.game.keyboardConfig.setKeys["FORWARD"]
+        e.key == this.game.keyboardConfig.keySettings["JUMP"] ||
+        e.key == this.game.keyboardConfig.keySettings["CROUCH"] ||
+        e.key == this.game.keyboardConfig.keySettings["BACKWARD"] ||
+        e.key == this.game.keyboardConfig.keySettings["FORWARD"]
       ) {
         this.keys.splice(this.keys.indexOf(e.key), 1);
       }

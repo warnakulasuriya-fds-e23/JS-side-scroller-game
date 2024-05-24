@@ -21,14 +21,14 @@ export class Sitting extends State {
     this.player.playerSpriteAnimations.frameY = 5;
     this.player.game.speedFraction = 0;
   }
-  handleKeyBoardInput(pressedDownKeys) {
+  handleKeyBoardInput(pressedDownKeys, keySettings) {
     if (
-      (pressedDownKeys.includes("ArrowLeft") ||
-        pressedDownKeys.includes("ArrowRight")) &&
-      !pressedDownKeys.includes("ArrowDown")
+      (pressedDownKeys.includes(keySettings["BACKWARD"]) ||
+        pressedDownKeys.includes(keySettings["FORWARD"])) &&
+      !pressedDownKeys.includes(keySettings["CROUCH"])
     ) {
       this.player.playerStateController.setState(stateNums.RUNNING);
-    } else if (pressedDownKeys.includes("ArrowUp")) {
+    } else if (pressedDownKeys.includes(keySettings["JUMP"])) {
       this.player.playerStateController.setState(stateNums.JUMPING);
     }
   }
@@ -43,10 +43,10 @@ export class Running extends State {
     this.player.playerSpriteAnimations.frameY = 3;
     this.player.game.speedFraction = 1;
   }
-  handleKeyBoardInput(pressedDownKeys) {
-    if (pressedDownKeys.includes("ArrowDown")) {
+  handleKeyBoardInput(pressedDownKeys, keySettings) {
+    if (pressedDownKeys.includes(keySettings["CROUCH"])) {
       this.player.playerStateController.setState(stateNums.SITTING);
-    } else if (pressedDownKeys.includes("ArrowUp")) {
+    } else if (pressedDownKeys.includes(keySettings["JUMP"])) {
       this.player.playerStateController.setState(stateNums.JUMPING);
     }
   }
@@ -61,7 +61,7 @@ export class Jumping extends State {
     this.player.playerSpriteAnimations.frameY = 1;
     this.player.game.speedFraction = 1;
   }
-  handleKeyBoardInput(pressedDownKeys) {
+  handleKeyBoardInput(pressedDownKeys, keySettings) {
     if (this.player.movement.yVelocity == 0) {
       this.player.playerStateController.setState(stateNums.FALLING);
     }
@@ -77,9 +77,9 @@ export class Falling extends State {
     this.player.playerSpriteAnimations.frameY = 2;
     this.player.game.speedFraction = 1;
   }
-  handleKeyBoardInput(pressedDownKeys) {
+  handleKeyBoardInput(pressedDownKeys, keySettings) {
     if (this.player.onGround()) {
-      if (pressedDownKeys.includes("ArrowDown")) {
+      if (pressedDownKeys.includes(keySettings["CROUCH"])) {
         this.player.playerStateController.setState(stateNums.SITTING);
       } else {
         this.player.playerStateController.setState(stateNums.RUNNING);
@@ -98,15 +98,15 @@ export class Idling extends State {
     this.player.playerSpriteAnimations.frameY = 0;
     this.player.game.speedFraction = 0;
   }
-  handleKeyBoardInput(pressedDownKeys) {
+  handleKeyBoardInput(pressedDownKeys, keySettings) {
     if (
-      pressedDownKeys.includes("ArrowLeft") ||
-      pressedDownKeys.includes("ArrowRight")
+      pressedDownKeys.includes(keySettings["BACKWARD"]) ||
+      pressedDownKeys.includes(keySettings["FORWARD"])
     ) {
       this.player.playerStateController.setState(stateNums.RUNNING);
-    } else if (pressedDownKeys.includes("ArrowDown")) {
+    } else if (pressedDownKeys.includes(keySettings["CROUCH"])) {
       this.player.playerStateController.setState(stateNums.SITTING);
-    } else if (pressedDownKeys.includes("ArrowUp")) {
+    } else if (pressedDownKeys.includes(keySettings["JUMP"])) {
       this.player.playerStateController.setState(stateNums.JUMPING);
     }
   }

@@ -9,14 +9,15 @@ export class Player {
     this.x = 0;
     this.y = this.game.height - this.height - this.game.groundMargin;
     this.spriteSheet = document.getElementById("player");
-    this.movement = new Movement();
+    this.movement = new Movement(game);
     this.playerSpriteAnimations = new PlayerSpriteSheetAnimations(this);
     this.playerStateController = new PlayerStateController(this);
   }
   update(pressedDownKeys, deltaTime) {
     //STATE HANDING
     this.playerStateController.currentState.handleKeyBoardInput(
-      pressedDownKeys
+      pressedDownKeys,
+      this.game.keyboardConfig.keySettings
     );
 
     //MOVEMENT HANDLING

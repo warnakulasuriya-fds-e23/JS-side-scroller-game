@@ -1,8 +1,8 @@
 export class KeyBoardConfiguration {
   constructor() {
-    this.setKeys = {
-      FORWARD: "ArrowLeft",
-      BACKWARD: "ArrowRight",
+    this.keySettings = {
+      FORWARD: "ArrowRight",
+      BACKWARD: "ArrowLeft",
       JUMP: "ArrowUp",
       CROUCH: "ArrowDown",
     };
