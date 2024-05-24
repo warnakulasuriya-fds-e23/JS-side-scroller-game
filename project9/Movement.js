@@ -1,5 +1,7 @@
 export class Movement {
-  constructor() {
+  constructor(game) {
+    this.game = game;
+    // this.setKeys = this.game.keyboardConfig.setKeys;
     this.xVelocity = 0;
     this.max_xVelocity = 10;
     this.yVelocity = 0;
@@ -8,9 +10,15 @@ export class Movement {
   }
   horizontalMotion(player, pressedDownKeys) {
     player.x += this.xVelocity; //motion along x axis
-    if (pressedDownKeys.includes("ArrowRight")) {
+    if (
+      pressedDownKeys.includes("ArrowRight") &&
+      !pressedDownKeys.includes("ArrowDown")
+    ) {
       this.xVelocity = this.max_xVelocity;
-    } else if (pressedDownKeys.includes("ArrowLeft")) {
+    } else if (
+      pressedDownKeys.includes("ArrowLeft") &&
+      !pressedDownKeys.includes("ArrowDown")
+    ) {
       this.xVelocity = -this.max_xVelocity;
     } else {
       this.xVelocity = 0;

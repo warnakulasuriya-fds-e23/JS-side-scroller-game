@@ -10,7 +10,9 @@ class Layer {
   }
   update() {
     if (this.x < -this.layerWidth) this.x = 0;
-    else this.x -= this.game.speed * this.speedModifier;
+    else
+      this.x -=
+        this.game.maxSpeed * this.game.speedFraction * this.speedModifier;
   }
   draw(context) {
     //here we will be drawing the layer image twice to make things seamless
@@ -48,28 +50,28 @@ export class Background {
       this.game,
       this.width,
       this.height,
-      1,
+      0,
       this.layer1image
     );
     this.layer2 = new Layer(
       this.game,
       this.width,
       this.height,
-      1,
+      0.2,
       this.layer2image
     );
     this.layer3 = new Layer(
       this.game,
       this.width,
       this.height,
-      1,
+      0.4,
       this.layer3image
     );
     this.layer4 = new Layer(
       this.game,
       this.width,
       this.height,
-      1,
+      0.8,
       this.layer4image
     );
     this.layer5 = new Layer(

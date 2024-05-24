@@ -1,3 +1,4 @@
+import { KeyBoardConfiguration } from "./KeyboardConfig.js";
 import { Player } from "./player.js";
 import { InputHandler } from "./input.js";
 import { Background } from "./Background.js";
@@ -10,13 +11,15 @@ window.addEventListener("load", function () {
 
   class Game {
     constructor(width, height) {
+      this.keyboardConfig = new KeyBoardConfiguration();
       this.width = width;
       this.height = height;
-      this.groundMargin = 50;
-      this.speed = 3;
+      this.groundMargin = 80;
+      this.speedFraction = 0;
+      this.maxSpeed = 5;
       this.background = new Background(this);
       this.player = new Player(this);
-      this.input = new InputHandler();
+      this.input = new InputHandler(this);
     }
     update(deltaTime) {
       this.background.update();
