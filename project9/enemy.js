@@ -1,32 +1,41 @@
+//CHECK THE DRAW FUNCTIONS
 class Enemy {
-  constructor() {
+  constructor(game) {
+    this.game = game;
     this.frameX = 0;
     this.frameY = 0;
     this.fps = 20;
     this.frameInterval = 1000 / this.fps;
     this.frameTimer = 0;
+    this.markedForDeleteion = false;
   }
   update(deltaTime) {
-    //movement
-    this.x += this.xVelocity;
-    this.y += this.yVelocity;
+    //movement (the properties utilized here will be accessed from the child class in which the update method is called)
+    this.posX += this.xVelocity - this.game.maxSpeed * this.game.speedFraction;
+    this.posY += this.yVelocity;
 
     //sprite animation
-    if (this.frameTime > this.frameInterval) {
+    if (this.frameTimer > this.frameInterval) {
       this.frameTimer = 0;
       if (this.frameX < this.totalspriteFrames - 1) this.frameX++;
       else this.frameX = 0;
     } else this.frameTimer += deltaTime;
+
+    //check if enemy has gone off screen
+    if (this.posX + this.spriteWidth < 0) {
+      this.markedForDeleteion = true;
+    }
   }
   draw(context) {
-    context.draw(
+    //the properties utilized here will be accessed from the child class in which the update method is called
+    context.drawImage(
       this.enemyImage,
       this.frameX * this.spriteWidth,
       0, //cuz enemies have only one row in their sprite sheet
       this.spriteWidth,
       this.spirteHeight,
-      this.spawnX,
-      this.spawnY,
+      this.posX,
+      this.posY,
       this.spriteWidth,
       this.spirteHeight
     );
@@ -35,10 +44,9 @@ class Enemy {
 
 class FlyingEnemy extends Enemy {
   constructor(game) {
-    super();
-    this.game = game;
-    this.spawnX = 200; //x position of spawn point (starting point) of enemy
-    this.spawnY = 200; //y position of spaw "" "" "" ""
+    super(game);
+    this.spawnX = game.width; //x position of spawn point (starting point) of enemy
+    this.spawnY = Math.random() * game.height * 0.5; //y position of spaw "" "" "" ""
   }
 }
 
@@ -47,7 +55,9 @@ export class Fly extends FlyingEnemy {
     super(game);
     this.spriteWidth = 60;
     this.spirteHeight = 44;
-    this.xVelocity = 2;
+    this.posX = this.spawnX; //starts at spawn point
+    this.posY = this.spawnY; //starts at "" ""
+    this.xVelocity = -1 + Math.random() * -3;
     this.yVelocity = 0;
     this.totalspriteFrames = 6;
     this.enemyImage = document.getElementById("enemy_fly");

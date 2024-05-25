@@ -3,6 +3,7 @@ import { Player } from "./player.js";
 import { InputHandler } from "./input.js";
 import { Background } from "./Background.js";
 
+import { EnemyController } from "./EnemyController.js";
 window.addEventListener("load", function () {
   const canvas = document.getElementById("mainCanvas");
   const ctx = canvas.getContext("2d");
@@ -21,14 +22,19 @@ window.addEventListener("load", function () {
       this.background = new Background(this);
       this.player = new Player(this);
       this.input = new InputHandler(this);
+      this.currentlyActiveEnemies = [];
+      this.enemyController = new EnemyController(this);
     }
     update(deltaTime) {
       this.background.update();
       this.player.update(this.input.keys, deltaTime);
+      //handle enemies
+      this.enemyController.EnemyHandler(deltaTime);
     }
     draw(context) {
       this.background.draw(context);
       this.player.draw(context);
+      this.enemyController.DrawEnemies(context);
     }
   }
   const game = new Game(canvas.width, canvas.height);
