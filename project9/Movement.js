@@ -9,7 +9,7 @@ export class Movement {
     this.g = 1; //graviational acceleration
   }
   horizontalMotion(player, pressedDownKeys) {
-    player.x += this.xVelocity; //motion along x axis
+    player.posX += this.xVelocity; //motion along x axis
     if (
       pressedDownKeys.includes(this.keySettings["FORWARD"]) &&
       !pressedDownKeys.includes(this.keySettings["CROUCH"])
@@ -24,12 +24,12 @@ export class Movement {
       this.xVelocity = 0;
     }
 
-    if (player.x < 0) {
-      player.x = 0;
+    if (player.posX < 0) {
+      player.posX = 0;
     }
 
-    if (player.x > player.game.width - player.width) {
-      player.x = player.game.width - player.width;
+    if (player.posX > player.game.width - player.width) {
+      player.posX = player.game.width - player.width;
     }
   }
 
@@ -37,7 +37,7 @@ export class Movement {
   verticalMotion(player, pressedDownKeys) {
     if (pressedDownKeys.includes(this.keySettings["JUMP"]) && player.onGround())
       this.yVelocity = -30;
-    player.y += this.yVelocity; //motion along y axis
+    player.posY += this.yVelocity; //motion along y axis
     if (!player.onGround()) {
       this.yVelocity += this.g; //the is deceleration taking place (the g is added and not subtracted because y axis is inverted)
     } else this.yVelocity = 0; //final velocity (stops player from falling throught the floor)

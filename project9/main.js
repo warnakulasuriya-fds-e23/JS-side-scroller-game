@@ -21,6 +21,7 @@ window.addEventListener("load", function () {
       this.maxSpeed = 5;
       this.background = new Background(this);
       this.player = new Player(this);
+      this.debugMode = false;
       this.input = new InputHandler(this);
       this.currentlyActiveEnemies = [];
       this.enemyController = new EnemyController(this);

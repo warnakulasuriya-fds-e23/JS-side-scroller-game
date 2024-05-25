@@ -6,8 +6,8 @@ export class Player {
     this.game = game;
     this.width = 100;
     this.height = 91.3;
-    this.x = 0;
-    this.y = this.game.height - this.height - this.game.groundMargin;
+    this.posX = 0;
+    this.posY = this.game.height - this.height - this.game.groundMargin;
     this.spriteSheet = document.getElementById("player");
     this.movement = new Movement(game);
     this.playerSpriteAnimations = new PlayerSpriteSheetAnimations(this);
@@ -31,14 +31,17 @@ export class Player {
   }
 
   draw(context) {
+    if (this.game.debugMode == true) {
+      context.strokeRect(this.posX, this.posY, this.width, this.height);
+    }
     context.drawImage(
       this.spriteSheet,
       this.playerSpriteAnimations.frameX * this.width,
       this.playerSpriteAnimations.frameY * this.height,
       this.width,
       this.height,
-      this.x,
-      this.y,
+      this.posX,
+      this.posY,
       this.width,
       this.height
     );
@@ -47,6 +50,6 @@ export class Player {
   onGround() {
     //returns true if player is on ground
     //(might look a bit weird but thats cuz we're dealing wiht an inverted y axis)
-    return this.y >= this.game.height - this.height - this.game.groundMargin;
+    return this.posY >= this.game.height - this.height - this.game.groundMargin;
   }
 }

@@ -5,13 +5,13 @@ class Layer {
     this.layerHeight = layerHeight;
     this.speedModifier = speedModifier;
     this.layerImage = layerImage;
-    this.x = 0;
-    this.y = 0;
+    this.posX = 0;
+    this.posY = 0;
   }
   update() {
-    if (this.x < -this.layerWidth) this.x = 0;
+    if (this.posX < -this.layerWidth) this.posX = 0;
     else
-      this.x -=
+      this.posX -=
         this.game.maxSpeed * this.game.speedFraction * this.speedModifier;
   }
   draw(context) {
@@ -19,16 +19,16 @@ class Layer {
     //note that second drawing of the layer will never be fully viewed, this.x resets to zero before it can
     context.drawImage(
       this.layerImage,
-      this.x,
-      this.y,
+      this.posX,
+      this.posY,
       this.layerWidth,
       this.layerHeight
     );
 
     context.drawImage(
       this.layerImage,
-      this.x + this.layerWidth,
-      this.y,
+      this.posX + this.layerWidth,
+      this.posY,
       this.layerWidth,
       this.layerHeight
     );
