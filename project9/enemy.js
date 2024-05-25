@@ -61,12 +61,36 @@ export class Fly extends FlyingEnemy {
     this.yVelocity = 0;
     this.totalspriteFrames = 6;
     this.enemyImage = document.getElementById("enemy_fly");
+    this.angle = 0;
+    this.varyAngle = Math.random() * 0.1 + 0.1;
   }
   update(deltaTime) {
     super.update(deltaTime);
+    this.angle += this.varyAngle;
+    this.posY += Math.sin(this.angle);
   }
 }
 
-class GroundEnemy extends Enemy {}
+class GroundEnemy extends Enemy {
+  constructor(game) {
+    super(game);
+    this.spawnX = game.width;
+  }
+}
+
+export class Plant extends GroundEnemy {
+  constructor(game) {
+    super(game);
+    this.spriteWidth = 60;
+    this.spirteHeight = 87;
+    this.enemyImage = document.getElementById("enemy_plant");
+    this.spawnY = game.height - game.groundMargin - this.spirteHeight;
+    this.posX = this.spawnX;
+    this.posY = this.spawnY;
+    this.totalspriteFrames = 2;
+    this.xVelocity = 0;
+    this.yVelocity = 0;
+  }
+}
 
 class ClimbingEnemy extends Enemy {}

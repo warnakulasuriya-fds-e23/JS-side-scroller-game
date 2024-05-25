@@ -1,4 +1,4 @@
-import { Fly } from "./enemy.js";
+import { Fly, Plant } from "./enemy.js";
 export class EnemyController {
   constructor(game) {
     this.game = game;
@@ -7,6 +7,9 @@ export class EnemyController {
     this.currentlyActiveEnemies = [];
   }
   AddEnemy() {
+    if (this.game.speedFraction > 0 && Math.random() < 0.5) {
+      this.currentlyActiveEnemies.push(new Plant(this.game));
+    }
     this.currentlyActiveEnemies.push(new Fly(this.game));
   }
   RemoveEnemy(enemy) {
