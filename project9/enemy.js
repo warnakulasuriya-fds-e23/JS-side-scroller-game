@@ -7,7 +7,7 @@ class Enemy {
     this.fps = 20;
     this.frameInterval = 1000 / this.fps;
     this.frameTimer = 0;
-    this.markedForDeleteion = false;
+    this.markedForDeletion = false;
   }
   update(deltaTime) {
     //movement (the properties utilized here will be accessed from the child class in which the update method is called)
@@ -23,13 +23,22 @@ class Enemy {
 
     //check if enemy has gone off screen
     if (this.posX < 0 - this.spriteWidth) {
-      this.markedForDeleteion = true;
+      this.markedForDeletion = true;
     }
     if (this.posY < 0 - this.spirteHeight) {
-      this.markedForDeleteion = true;
+      this.markedForDeletion = true;
     }
   }
   draw(context) {
+    if (this.game.debugMode) {
+      context.strokeStyle = "red";
+      context.strokeRect(
+        this.posX,
+        this.posY,
+        this.spriteWidth,
+        this.spirteHeight
+      );
+    }
     //the properties utilized here will be accessed from the child class in which the update method is called
     context.drawImage(
       this.enemyImage,
@@ -128,6 +137,7 @@ export class Spider_Big extends ClimbingEnemy {
 
   draw(context) {
     super.draw(context);
+    context.strokeStyle = "black";
     context.beginPath();
     context.moveTo(this.posX + this.spriteWidth / 2, 0);
     context.lineTo(this.posX + this.spriteWidth / 2, this.posY + 44);

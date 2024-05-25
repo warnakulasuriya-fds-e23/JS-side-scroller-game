@@ -4,10 +4,10 @@ import { PlayerStateController } from "./PlayerStateController.js";
 export class Player {
   constructor(game) {
     this.game = game;
-    this.width = 100;
-    this.height = 91.3;
+    this.spriteWidth = 100;
+    this.spriteHeight = 91.3;
     this.posX = 0;
-    this.posY = this.game.height - this.height - this.game.groundMargin;
+    this.posY = this.game.height - this.spriteHeight - this.game.groundMargin;
     this.spriteSheet = document.getElementById("player");
     this.movement = new Movement(game);
     this.playerSpriteAnimations = new PlayerSpriteSheetAnimations(this);
@@ -23,6 +23,9 @@ export class Player {
     //MOVEMENT HANDLING
     this.movement.MotionHandling(this, pressedDownKeys);
 
+    //COLLiSION HANDLING
+    this.collisionDetection();
+
     //sprite animation
     this.playerSpriteAnimations.deltaTime = deltaTime;
     this.playerSpriteAnimations.playerState =
@@ -31,25 +34,50 @@ export class Player {
   }
 
   draw(context) {
-    if (this.game.debugMode == true) {
-      context.strokeRect(this.posX, this.posY, this.width, this.height);
+    if (this.game.debugMode) {
+      context.strokeStyle = "blue";
+      context.strokeRect(
+        this.posX,
+        this.posY,
+        this.spriteWidth,
+        this.spriteHeight
+      );
     }
     context.drawImage(
       this.spriteSheet,
-      this.playerSpriteAnimations.frameX * this.width,
-      this.playerSpriteAnimations.frameY * this.height,
-      this.width,
-      this.height,
+      this.playerSpriteAnimations.frameX * this.spriteWidth,
+      this.playerSpriteAnimations.frameY * this.spriteHeight,
+      this.spriteWidth,
+      this.spriteHeight,
       this.posX,
       this.posY,
-      this.width,
-      this.height
+      this.spriteWidth,
+      this.spriteHeight
     );
   }
 
   onGround() {
     //returns true if player is on ground
     //(might look a bit weird but thats cuz we're dealing wiht an inverted y axis)
-    return this.posY >= this.game.height - this.height - this.game.groundMargin;
+    return (
+      this.posY >= this.game.height - this.spriteHeight - this.game.groundMargin
+    );
+  }
+
+  collisionDetection() {
+    this.game.enemyController.currentlyActiveEnemies.forEach((enemy) => {
+      console.log("came into loop");
+
+      if (
+        enemy.posX < this.posX + this.spriteWidth &&
+        enemy.posX > this.posX &&
+        enemy.posY < this.posY + this.spriteHeight &&
+        enemy.posY > this.posY
+      ) {
+        enemy.markedForDeletion = true;
+        this.game.score++;
+        console.log(this.game.score);
+      }
+    });
   }
 }

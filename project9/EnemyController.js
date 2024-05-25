@@ -31,7 +31,7 @@ export class EnemyController {
   UpdateEnemies(deltaTime) {
     this.currentlyActiveEnemies.forEach((enemy) => {
       enemy.update(deltaTime);
-      if (enemy.markedForDeleteion == true) {
+      if (enemy.markedForDeletion == true) {
         this.RemoveEnemy(enemy);
       }
     });

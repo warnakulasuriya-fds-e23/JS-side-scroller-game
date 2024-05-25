@@ -16,6 +16,7 @@ window.addEventListener("load", function () {
       this.keyboardConfig = new KeyBoardConfiguration();
       this.width = width;
       this.height = height;
+      this.score = 0;
       this.groundMargin = 80;
       this.speedFraction = 0;
       this.maxSpeed = 5;
