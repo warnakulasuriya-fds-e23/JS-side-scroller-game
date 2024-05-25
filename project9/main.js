@@ -2,6 +2,7 @@ import { KeyBoardConfiguration } from "./KeyboardConfig.js";
 import { Player } from "./player.js";
 import { InputHandler } from "./input.js";
 import { Background } from "./Background.js";
+
 window.addEventListener("load", function () {
   const canvas = document.getElementById("mainCanvas");
   const ctx = canvas.getContext("2d");
