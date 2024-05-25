@@ -14,7 +14,6 @@ export class EnemyController {
       this.currentlyActiveEnemies.push(new Spider_Big(this.game));
     }
     this.currentlyActiveEnemies.push(new Fly(this.game));
-    console.log(this.currentlyActiveEnemies);
   }
   RemoveEnemy(enemy) {
     this.currentlyActiveEnemies.splice(

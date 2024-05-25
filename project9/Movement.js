@@ -23,13 +23,14 @@ export class Movement {
     } else {
       this.xVelocity = 0;
     }
-
+    //stop player from going out of bounds from left side of screen
     if (player.posX < 0) {
       player.posX = 0;
     }
 
-    if (player.posX > player.game.width - player.width) {
-      player.posX = player.game.width - player.width;
+    //stops player from going out of bounds from right side of screen
+    if (player.posX > this.game.width - player.spriteWidth) {
+      player.posX = this.game.width - player.spriteWidth;
     }
   }
 

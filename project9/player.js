@@ -66,8 +66,6 @@ export class Player {
 
   collisionDetection() {
     this.game.enemyController.currentlyActiveEnemies.forEach((enemy) => {
-      console.log("came into loop");
-
       if (
         enemy.posX < this.posX + this.spriteWidth &&
         enemy.posX > this.posX &&
@@ -76,7 +74,6 @@ export class Player {
       ) {
         enemy.markedForDeletion = true;
         this.game.score++;
-        console.log(this.game.score);
       }
     });
   }
