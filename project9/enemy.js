@@ -22,7 +22,10 @@ class Enemy {
     } else this.frameTimer += deltaTime;
 
     //check if enemy has gone off screen
-    if (this.posX + this.spriteWidth < 0) {
+    if (this.posX < 0 - this.spriteWidth) {
+      this.markedForDeleteion = true;
+    }
+    if (this.posY < 0 - this.spirteHeight) {
       this.markedForDeleteion = true;
     }
   }
@@ -93,4 +96,41 @@ export class Plant extends GroundEnemy {
   }
 }
 
-class ClimbingEnemy extends Enemy {}
+class ClimbingEnemy extends Enemy {
+  constructor(game) {
+    super(game);
+    this.spawnX = game.width;
+    this.spawnY = Math.random() * game.height * 0.5;
+    this.xVelocity = 0;
+    this.yVelocity = Math.random() > 0.5 ? 1 : -1;
+  }
+}
+
+export class Spider_Big extends ClimbingEnemy {
+  constructor(game) {
+    super(game);
+    this.spriteWidth = 120;
+    this.spirteHeight = 144;
+    this.posX = this.spawnX;
+    this.posY = this.spawnY;
+    this.enemyImage = document.getElementById("enemy_spider_big");
+    this.totalspriteFrames = 6;
+  }
+  update(deltaTime) {
+    super.update(deltaTime);
+    if (
+      this.posY >
+      this.game.height - this.game.groundMargin - this.spirteHeight
+    ) {
+      this.yVelocity = -1;
+    }
+  }
+
+  draw(context) {
+    super.draw(context);
+    context.beginPath();
+    context.moveTo(this.posX + this.spriteWidth / 2, 0);
+    context.lineTo(this.posX + this.spriteWidth / 2, this.posY + 44);
+    context.stroke();
+  }
+}
