@@ -1,4 +1,4 @@
-import { Dust } from "./PlayerParticles.js";
+import { Dust, Fire } from "./PlayerParticles.js";
 
 export class PlayerParticleController {
   constructor(player) {
@@ -7,9 +7,17 @@ export class PlayerParticleController {
   }
   update() {
     if (this.player.playerStateController.currentState.state == "RUNNING") {
-      let dust = new Dust(this.player);
-      this.currentlyActiveParticles.push(dust);
+      this.currentlyActiveParticles.unshift(new Dust(this.player));
+    } else if (
+      this.player.playerStateController.currentState.state == "ROLLING"
+    ) {
+      this.currentlyActiveParticles.unshift(new Fire(this.player));
     }
+
+    if (this.currentlyActiveParticles.length > 200) {
+      this.currentlyActiveParticles.splice(0, 50);
+    }
+
     this.currentlyActiveParticles.forEach((particle, index) => {
       particle.update();
       if (particle.markedForDeletion == true)

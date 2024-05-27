@@ -21,7 +21,7 @@ export class Dust extends Particle {
     this.particleSpawnY = this.player.posY + this.player.spriteHeight;
     this.posX = this.particleSpawnX;
     this.posY = this.particleSpawnY;
-    this.size = Math.random() * 10 + 10;
+    this.size = 1 * 10 + 10;
     this.xVelocity = Math.random();
     this.yVelocity = Math.random();
     this.dustColor = "rgb(0,0,0,0.15)";
@@ -34,5 +34,32 @@ export class Dust extends Particle {
     context.fillStyle = this.dustColor;
     context.fill();
     // context.restore();
+  }
+}
+
+export class Fire extends Particle {
+  constructor(player) {
+    super(player);
+    this.particleImage = document.getElementById("fireSprite");
+    this.size = Math.random() * 50 + 50;
+    this.particleSpawnX = this.player.posX + this.player.spriteWidth / 2;
+    this.particleSpawnY = this.player.posY + this.player.spriteHeight / 2;
+    this.posX = this.particleSpawnX;
+    this.posY = this.particleSpawnY;
+    this.xVelocity = 1;
+    this.yVelocity = 1;
+    this.angle = 0;
+  }
+  update() {
+    super.update();
+  }
+  draw(context) {
+    context.drawImage(
+      this.particleImage,
+      this.posX,
+      this.posY,
+      this.size,
+      this.size
+    );
   }
 }
