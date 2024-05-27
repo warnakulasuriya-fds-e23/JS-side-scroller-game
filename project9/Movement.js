@@ -20,7 +20,7 @@ export class Movement {
     }
   }
   horizontalMotion(player, pressedDownKeys) {
-    if ((player.playerStateController.currentState.state = "ROLLING")) {
+    if (player.playerStateController.currentState.state == "ROLLING") {
       this.setGameSpeedMode("FAST");
     } else {
       this.setGameSpeedMode("NORMAL");

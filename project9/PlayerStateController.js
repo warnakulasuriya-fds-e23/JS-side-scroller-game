@@ -17,6 +17,7 @@ export class PlayerStateController {
       new Idling(player),
       new Rolling(player),
     ];
+
     this.currentState = this.states[0];
     this.currentState.activate();
   }

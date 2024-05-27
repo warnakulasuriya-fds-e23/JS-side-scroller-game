@@ -130,7 +130,6 @@ export class Rolling extends State {
     this.player = player;
   }
   activate() {
-    console.log("Roll activate");
     this.player.playerSpriteAnimations.frameY = 6;
     this.player.game.speedFraction = 1;
   }

@@ -1,6 +1,7 @@
 import { Movement } from "./Movement.js";
 import { PlayerSpriteSheetAnimations } from "./playerSpriteSheetAnimation.js";
 import { PlayerStateController } from "./PlayerStateController.js";
+import { PlayerParticleController } from "./PlayerParticleController.js";
 export class Player {
   constructor(game) {
     this.game = game;
@@ -8,10 +9,11 @@ export class Player {
     this.spriteHeight = 91.3;
     this.posX = 0;
     this.posY = this.game.height - this.spriteHeight - this.game.groundMargin;
-    this.spriteSheet = document.getElementById("player");
+    this.spriteSheet = document.getElementById("playerSprites");
     this.movement = new Movement(game);
     this.playerSpriteAnimations = new PlayerSpriteSheetAnimations(this);
     this.playerStateController = new PlayerStateController(this);
+    this.playerParticleController = new PlayerParticleController(this);
   }
   update(pressedDownKeys, deltaTime) {
     //STATE HANDING
@@ -26,11 +28,14 @@ export class Player {
     //COLLiSION HANDLING
     this.collisionDetection();
 
-    //sprite animation
+    //SPRITE ANIMATION HANDLING
     this.playerSpriteAnimations.deltaTime = deltaTime;
     this.playerSpriteAnimations.playerState =
       this.playerStateController.currentState.state;
     this.playerSpriteAnimations.animate();
+
+    //PARTICLES HANDLING
+    this.playerParticleController.update();
   }
 
   draw(context) {
@@ -54,6 +59,8 @@ export class Player {
       this.spriteWidth,
       this.spriteHeight
     );
+
+    this.playerParticleController.draw(context);
   }
 
   onGround() {
