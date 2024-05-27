@@ -5,7 +5,7 @@ export class KeyBoardConfiguration {
       BACKWARD: "ArrowLeft",
       JUMP: "ArrowUp",
       CROUCH: "ArrowDown",
-      ROLL: "Enter",
+      ROLL: "r",
       DEBUGMODE: "d",
     };
   }

@@ -1,4 +1,12 @@
-import { Sitting, Running, Jumping, Falling, Idling } from "./playerStates.js";
+import {
+  Sitting,
+  Running,
+  Jumping,
+  Falling,
+  Idling,
+  Rolling,
+} from "./playerStates.js";
+
 export class PlayerStateController {
   constructor(player) {
     this.states = [
@@ -7,6 +15,7 @@ export class PlayerStateController {
       new Jumping(player),
       new Falling(player),
       new Idling(player),
+      new Rolling(player),
     ];
     this.currentState = this.states[0];
     this.currentState.activate();

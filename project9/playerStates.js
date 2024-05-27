@@ -31,6 +31,11 @@ export class Sitting extends State {
       this.player.playerStateController.setState(stateNums.RUNNING);
     } else if (pressedDownKeys.includes(keySettings["JUMP"])) {
       this.player.playerStateController.setState(stateNums.JUMPING);
+    } else if (
+      pressedDownKeys.includes(keySettings["ROLL"]) &&
+      !pressedDownKeys.includes(keySettings["CROUCH"])
+    ) {
+      this.player.playerStateController.setState(stateNums.ROLLING);
     }
   }
 }
@@ -119,6 +124,7 @@ export class Rolling extends State {
     this.player = player;
   }
   activate() {
+    console.log("Roll activate");
     this.player.playerSpriteAnimations.frameY = 6;
     this.player.game.speedFraction = 1;
   }
