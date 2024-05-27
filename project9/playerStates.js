@@ -54,6 +54,8 @@ export class Running extends State {
       this.player.playerStateController.setState(stateNums.SITTING);
     } else if (pressedDownKeys.includes(keySettings["JUMP"])) {
       this.player.playerStateController.setState(stateNums.JUMPING);
+    } else if (pressedDownKeys.includes(keySettings["ROLL"])) {
+      this.player.playerStateController.setState(stateNums.ROLLING);
     }
   }
 }
@@ -70,6 +72,8 @@ export class Jumping extends State {
   handleKeyBoardInput(pressedDownKeys, keySettings) {
     if (this.player.movement.yVelocity == 0) {
       this.player.playerStateController.setState(stateNums.FALLING);
+    } else if (pressedDownKeys.includes(keySettings["ROLL"])) {
+      this.player.playerStateController.setState(stateNums.ROLLING);
     }
   }
 }
@@ -90,6 +94,8 @@ export class Falling extends State {
       } else {
         this.player.playerStateController.setState(stateNums.RUNNING);
       }
+    } else if (pressedDownKeys.includes(keySettings["ROLL"])) {
+      this.player.playerStateController.setState(stateNums.ROLLING);
     }
   }
 }
@@ -129,15 +135,12 @@ export class Rolling extends State {
     this.player.game.speedFraction = 1;
   }
   handleKeyBoardInput(pressedDownKeys, keySettings) {
-    if (
-      pressedDownKeys.includes(keySettings["BACKWARD"]) ||
-      pressedDownKeys.includes(keySettings["FORWARD"])
-    ) {
-      this.player.playerStateController.setState(stateNums.RUNNING);
-    } else if (pressedDownKeys.includes(keySettings["CROUCH"])) {
-      this.player.playerStateController.setState(stateNums.SITTING);
-    } else if (pressedDownKeys.includes(keySettings["JUMP"])) {
-      this.player.playerStateController.setState(stateNums.JUMPING);
+    if (!pressedDownKeys.includes(keySettings["ROLL"])) {
+      if (this.player.onGround()) {
+        this.player.playerStateController.setState(stateNums.RUNNING);
+      } else {
+        this.player.playerStateController.setState(stateNums.FALLING);
+      }
     }
   }
 }

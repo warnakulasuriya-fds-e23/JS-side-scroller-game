@@ -22,7 +22,8 @@ export class InputHandler {
         e.key == this.keySettings["JUMP"] ||
         e.key == this.keySettings["CROUCH"] ||
         e.key == this.keySettings["BACKWARD"] ||
-        e.key == this.keySettings["FORWARD"]
+        e.key == this.keySettings["FORWARD"] ||
+        e.key == this.keySettings["ROLL"]
       ) {
         this.keys.splice(this.keys.indexOf(e.key), 1);
       }
