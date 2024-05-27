@@ -1,0 +1,3 @@
+change
+game.speedFraction to game.gameSpeedFration
+game.maxSpeed to game.gameSpeed

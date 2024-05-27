@@ -4,6 +4,7 @@ const stateNums = {
   JUMPING: 2,
   FALLING: 3,
   IDLING: 4,
+  ROLLING: 5,
 };
 
 class State {
@@ -97,6 +98,29 @@ export class Idling extends State {
   activate() {
     this.player.playerSpriteAnimations.frameY = 0;
     this.player.game.speedFraction = 0;
+  }
+  handleKeyBoardInput(pressedDownKeys, keySettings) {
+    if (
+      pressedDownKeys.includes(keySettings["BACKWARD"]) ||
+      pressedDownKeys.includes(keySettings["FORWARD"])
+    ) {
+      this.player.playerStateController.setState(stateNums.RUNNING);
+    } else if (pressedDownKeys.includes(keySettings["CROUCH"])) {
+      this.player.playerStateController.setState(stateNums.SITTING);
+    } else if (pressedDownKeys.includes(keySettings["JUMP"])) {
+      this.player.playerStateController.setState(stateNums.JUMPING);
+    }
+  }
+}
+
+export class Rolling extends State {
+  constructor(player) {
+    super("ROLLING");
+    this.player = player;
+  }
+  activate() {
+    this.player.playerSpriteAnimations.frameY = 6;
+    this.player.game.speedFraction = 1;
   }
   handleKeyBoardInput(pressedDownKeys, keySettings) {
     if (

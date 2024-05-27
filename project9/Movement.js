@@ -8,7 +8,24 @@ export class Movement {
     this.max_yVelocity = 10;
     this.g = 1; //graviational acceleration
   }
+  setGameSpeedMode(mode) {
+    if (mode == "STOPPED") {
+      this.max_xVelocity = 0;
+    } else if (mode == "SLOW") {
+      this.max_xVelocity = 5;
+    } else if (mode == "NORMAL") {
+      this.max_xVelocity = 10;
+    } else if (mode == "FAST") {
+      this.max_xVelocity = 20;
+    }
+  }
   horizontalMotion(player, pressedDownKeys) {
+    if ((player.playerStateController.currentState.state = "ROLLING")) {
+      this.setGameSpeedMode("FAST");
+    } else {
+      this.setGameSpeedMode("NORMAL");
+    }
+
     player.posX += this.xVelocity; //motion along x axis
     if (
       pressedDownKeys.includes(this.keySettings["FORWARD"]) &&
