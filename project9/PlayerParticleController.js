@@ -4,6 +4,7 @@ export class PlayerParticleController {
   constructor(player) {
     this.player = player;
     this.currentlyActiveParticles = [];
+    this.maxParticles = 50;
   }
   update() {
     if (this.player.playerStateController.currentState.state == "RUNNING") {
@@ -14,8 +15,11 @@ export class PlayerParticleController {
       this.currentlyActiveParticles.unshift(new Fire(this.player));
     }
 
-    if (this.currentlyActiveParticles.length > 200) {
-      this.currentlyActiveParticles.splice(0, 50);
+    if (this.currentlyActiveParticles.length > this.maxParticles) {
+      this.currentlyActiveParticles.splice(
+        0,
+        Math.floor((3 * this.maxParticles) / 4)
+      );
     }
 
     this.currentlyActiveParticles.forEach((particle, index) => {
