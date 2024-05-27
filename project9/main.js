@@ -2,7 +2,7 @@ import { KeyBoardConfiguration } from "./KeyboardConfig.js";
 import { Player } from "./player.js";
 import { InputHandler } from "./input.js";
 import { Background } from "./Background.js";
-
+import { UI } from "./UI.js";
 import { EnemyController } from "./EnemyController.js";
 window.addEventListener("load", function () {
   const canvas = document.getElementById("mainCanvas");
@@ -17,6 +17,7 @@ window.addEventListener("load", function () {
       this.width = width;
       this.height = height;
       this.score = 0;
+      this.UI = new UI(this);
       this.groundMargin = 80;
       this.speedFraction = 0;
       this.maxSpeed = 5;
@@ -37,6 +38,7 @@ window.addEventListener("load", function () {
       this.background.draw(context);
       this.player.draw(context);
       this.enemyController.DrawEnemies(context);
+      this.UI.draw(context);
     }
   }
   const game = new Game(canvas.width, canvas.height);
