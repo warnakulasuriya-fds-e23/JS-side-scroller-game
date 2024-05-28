@@ -1,18 +1,41 @@
-import { Dust, Fire } from "./PlayerParticles.js";
+import {
+  DustParticle,
+  FireParticle,
+  SplashParticle,
+} from "./PlayerParticles.js";
 
 export class PlayerParticleController {
   constructor(player) {
     this.player = player;
     this.currentlyActiveParticles = [];
-    this.maxParticles = 50;
+    this.maxParticles = 100;
+  }
+  clearCurrentParticles() {
+    this.currentlyActiveParticles.splice(
+      0,
+      this.currentlyActiveParticles.length
+    );
+  }
+  addDustParticle() {
+    this.currentlyActiveParticles.unshift(new DustParticle(this.player));
+  }
+  addFireParticle() {
+    this.currentlyActiveParticles.unshift(new FireParticle(this.player));
+  }
+  addSplashParticles() {
+    //will be called within the handleKeyBoardInput method of the Diving class
+    this.clearCurrentParticles();
+    for (let i = 1; i <= 100; i++) {
+      this.currentlyActiveParticles.unshift(new SplashParticle(this.player));
+    }
   }
   update() {
     if (this.player.playerStateController.currentState.state == "RUNNING") {
-      this.currentlyActiveParticles.unshift(new Dust(this.player));
+      this.addDustParticle();
     } else if (
       this.player.playerStateController.currentState.state == "ROLLING"
     ) {
-      this.currentlyActiveParticles.unshift(new Fire(this.player));
+      this.addFireParticle();
     }
 
     if (this.currentlyActiveParticles.length > this.maxParticles) {

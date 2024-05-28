@@ -83,5 +83,20 @@ export class Player {
         this.game.score++;
       }
     });
+    this.game.enemyController.currentlyActiveEnemies.forEach((enemy) => {
+      this.playerParticleController.currentlyActiveParticles.forEach(
+        (particle) => {
+          if (
+            enemy.posX < particle.posX + particle.size &&
+            enemy.posX > particle.posX &&
+            enemy.posY < particle.posY + particle.size &&
+            enemy.posY > particle.posY
+          ) {
+            enemy.markedForDeletion = true;
+            this.game.score++;
+          }
+        }
+      );
+    });
   }
 }

@@ -19,11 +19,13 @@ export class PlayerStateController {
       new Rolling(player),
       new Diving(player),
     ];
-
+    this.previousState = this.states[4];
     this.currentState = this.states[0];
     this.currentState.activate();
   }
+  transition(stateNum) {}
   setState(stateNum) {
+    this.previousState = this.currentState;
     this.currentState = this.states[stateNum];
     this.currentState.activate();
   }

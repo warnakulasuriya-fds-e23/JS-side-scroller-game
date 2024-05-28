@@ -6,6 +6,7 @@ const stateNums = {
   IDLING: 4,
   ROLLING: 5,
   DIVING: 6,
+  TRANSITIONSTATE: 7,
 };
 
 class State {
@@ -30,7 +31,10 @@ export class Sitting extends State {
       !pressedDownKeys.includes(keySettings["CROUCH"])
     ) {
       this.player.playerStateController.setState(stateNums.RUNNING);
-    } else if (pressedDownKeys.includes(keySettings["JUMP"])) {
+    } else if (
+      pressedDownKeys.includes(keySettings["JUMP"]) &&
+      !pressedDownKeys.includes(keySettings["CROUCH"])
+    ) {
       this.player.playerStateController.setState(stateNums.JUMPING);
     } else if (
       pressedDownKeys.includes(keySettings["ROLL"]) &&
@@ -161,7 +165,8 @@ export class Diving extends State {
   handleKeyBoardInput(pressedDownKeys, keySettings) {
     if (this.player.onGround()) {
       if (!pressedDownKeys.includes(keySettings["ROLL"])) {
-        this.player.playerStateController.setState(stateNums.RUNNING);
+        this.player.playerParticleController.addSplashParticles();
+        this.player.playerStateController.setState(stateNums.SITTING);
       } else {
         this.player.playerStateController.setState(stateNums.ROLLING);
       }

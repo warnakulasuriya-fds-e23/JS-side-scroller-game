@@ -48,7 +48,6 @@ export class Movement {
       this.setPlayerSpeedMode("NORMAL");
     }
 
-    player.posX += this.xVelocity; //motion along x axis
     if (
       pressedDownKeys.includes(this.keySettings["FORWARD"]) &&
       !pressedDownKeys.includes(this.keySettings["CROUCH"])
@@ -62,17 +61,18 @@ export class Movement {
     } else {
       this.xVelocity = 0;
     }
+    player.posX += this.xVelocity; //motion along x axis
     this.boundaryHandling(player);
   }
 
   //PLEASE NOTE!! : here we are dealing with an inverted y-axis
   verticalMotion(player, pressedDownKeys) {
-    console.log(player.playerStateController.currentState.state);
     if (player.playerStateController.currentState.state == "DIVING") {
       this.yVelocity = 40;
     } else if (
       pressedDownKeys.includes(this.keySettings["JUMP"]) &&
-      player.onGround()
+      player.onGround() &&
+      !pressedDownKeys.includes(this.keySettings["CROUCH"])
     ) {
       this.yVelocity = -30;
     }
