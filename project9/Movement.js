@@ -8,7 +8,29 @@ export class Movement {
     this.max_yVelocity = 10;
     this.g = 1; //graviational acceleration
   }
-  setGameSpeedMode(mode) {
+
+  boundaryHandling(player) {
+    //stop player from going out of bounds from left side of screen
+    if (player.posX < 0) {
+      player.posX = 0;
+    }
+
+    //stops player from going out of bounds from right side of screen
+    if (player.posX > this.game.width - player.spriteWidth) {
+      player.posX = this.game.width - player.spriteWidth;
+    }
+
+    //stops player from going below the ground margin
+    if (
+      player.posY >
+      this.game.height - this.game.groundMargin - player.spriteHeight
+    ) {
+      player.posY =
+        this.game.height - this.game.groundMargin - player.spriteHeight;
+    }
+  }
+
+  setPlayerSpeedMode(mode) {
     if (mode == "STOPPED") {
       this.max_xVelocity = 0;
     } else if (mode == "SLOW") {
@@ -21,9 +43,9 @@ export class Movement {
   }
   horizontalMotion(player, pressedDownKeys) {
     if (player.playerStateController.currentState.state == "ROLLING") {
-      this.setGameSpeedMode("FAST");
+      this.setPlayerSpeedMode("FAST");
     } else {
-      this.setGameSpeedMode("NORMAL");
+      this.setPlayerSpeedMode("NORMAL");
     }
 
     player.posX += this.xVelocity; //motion along x axis
@@ -40,25 +62,28 @@ export class Movement {
     } else {
       this.xVelocity = 0;
     }
-    //stop player from going out of bounds from left side of screen
-    if (player.posX < 0) {
-      player.posX = 0;
-    }
-
-    //stops player from going out of bounds from right side of screen
-    if (player.posX > this.game.width - player.spriteWidth) {
-      player.posX = this.game.width - player.spriteWidth;
-    }
+    this.boundaryHandling(player);
   }
 
   //PLEASE NOTE!! : here we are dealing with an inverted y-axis
   verticalMotion(player, pressedDownKeys) {
-    if (pressedDownKeys.includes(this.keySettings["JUMP"]) && player.onGround())
+    console.log(player.playerStateController.currentState.state);
+    if (player.playerStateController.currentState.state == "DIVING") {
+      this.yVelocity = 40;
+    } else if (
+      pressedDownKeys.includes(this.keySettings["JUMP"]) &&
+      player.onGround()
+    ) {
       this.yVelocity = -30;
+    }
+
     player.posY += this.yVelocity; //motion along y axis
+
     if (!player.onGround()) {
       this.yVelocity += this.g; //the is deceleration taking place (the g is added and not subtracted because y axis is inverted)
     } else this.yVelocity = 0; //final velocity (stops player from falling throught the floor)
+
+    this.boundaryHandling(player);
   }
 
   MotionHandling(player, pressedDownKeys) {

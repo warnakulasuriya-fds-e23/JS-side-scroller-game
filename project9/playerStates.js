@@ -5,6 +5,7 @@ const stateNums = {
   FALLING: 3,
   IDLING: 4,
   ROLLING: 5,
+  DIVING: 6,
 };
 
 class State {
@@ -74,6 +75,8 @@ export class Jumping extends State {
       this.player.playerStateController.setState(stateNums.FALLING);
     } else if (pressedDownKeys.includes(keySettings["ROLL"])) {
       this.player.playerStateController.setState(stateNums.ROLLING);
+    } else if (pressedDownKeys.includes(keySettings["CROUCH"])) {
+      this.player.playerStateController.setState(stateNums.DIVING);
     }
   }
 }
@@ -96,6 +99,8 @@ export class Falling extends State {
       }
     } else if (pressedDownKeys.includes(keySettings["ROLL"])) {
       this.player.playerStateController.setState(stateNums.ROLLING);
+    } else if (pressedDownKeys.includes(keySettings["CROUCH"])) {
+      this.player.playerStateController.setState(stateNums.DIVING);
     }
   }
 }
@@ -139,6 +144,26 @@ export class Rolling extends State {
         this.player.playerStateController.setState(stateNums.RUNNING);
       } else {
         this.player.playerStateController.setState(stateNums.FALLING);
+      }
+    }
+  }
+}
+
+export class Diving extends State {
+  constructor(player) {
+    super("DIVING");
+    this.player = player;
+  }
+  activate() {
+    this.player.playerSpriteAnimations.frameY = 6;
+    this.player.game.speedFraction = 1;
+  }
+  handleKeyBoardInput(pressedDownKeys, keySettings) {
+    if (this.player.onGround()) {
+      if (!pressedDownKeys.includes(keySettings["ROLL"])) {
+        this.player.playerStateController.setState(stateNums.RUNNING);
+      } else {
+        this.player.playerStateController.setState(stateNums.ROLLING);
       }
     }
   }

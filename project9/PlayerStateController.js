@@ -5,6 +5,7 @@ import {
   Falling,
   Idling,
   Rolling,
+  Diving,
 } from "./playerStates.js";
 
 export class PlayerStateController {
@@ -16,6 +17,7 @@ export class PlayerStateController {
       new Falling(player),
       new Idling(player),
       new Rolling(player),
+      new Diving(player),
     ];
 
     this.currentState = this.states[0];

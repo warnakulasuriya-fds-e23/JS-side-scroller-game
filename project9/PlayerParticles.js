@@ -7,7 +7,6 @@ class Particle {
     this.posX +=
       this.xVelocity -
       this.player.game.maxSpeed * this.player.game.speedFraction;
-    console.log(this.posY);
     this.posY -= this.yVelocity;
     this.size *= 0.95;
     if (this.size < 0.01) this.markedForDeletion = true;
@@ -28,12 +27,12 @@ export class Dust extends Particle {
   }
 
   draw(context) {
-    // context.save();
+    context.save();
     context.beginPath();
     context.arc(this.posX, this.posY, this.size, 0, Math.PI * 2);
     context.fillStyle = this.dustColor;
     context.fill();
-    // context.restore();
+    context.restore();
   }
 }
 
