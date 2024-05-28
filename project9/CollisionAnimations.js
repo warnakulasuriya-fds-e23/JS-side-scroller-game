@@ -1,7 +1,7 @@
 export class CollisionAnimation {
-  constructor(game) {
-    this.game = game;
-    this.player = this.game.player;
+  constructor(enemy) {
+    this.enemy = enemy;
+    this.game = enemy.game;
     this.sizeModifier = Math.random() + 0.5;
     this.frameX = 0;
     this.frameY = 0;
@@ -15,6 +15,8 @@ export class CollisionAnimation {
       this.collisionImage,
       this.frameX * this.spriteWidth,
       0,
+      this.spriteWidth,
+      this.spriteHeight,
       this.posX,
       this.posY,
       this.modifiedWidth,
@@ -24,14 +26,14 @@ export class CollisionAnimation {
 }
 
 export class ExplosionCollision extends CollisionAnimation {
-  constructor(game) {
-    super(game);
+  constructor(enemy) {
+    super(enemy);
     this.collisionImage = document.getElementById("explosionSprite");
     this.spriteWidth = 100;
     this.spriteHeight = 90;
     this.modifiedWidth = this.spriteWidth * this.sizeModifier;
     this.modifiedHeight = this.spriteHeight * this.sizeModifier;
-    this.posX = this.player.posX - this.modifiedWidth * 0.5;
-    this.posY = this.player.posY - this.modifiedHeight * 0.5;
+    this.posX = this.enemy.posX - this.modifiedWidth * 0.5;
+    this.posY = this.enemy.posY - this.modifiedHeight * 0.5;
   }
 }

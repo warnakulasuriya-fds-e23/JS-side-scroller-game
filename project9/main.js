@@ -4,6 +4,7 @@ import { InputHandler } from "./input.js";
 import { Background } from "./Background.js";
 import { UIHandler } from "./UIHandler.js";
 import { EnemyHandler } from "./EnemyHandler.js";
+import { CollisionHandler } from "./CollisionHandler.js";
 window.addEventListener("load", function () {
   const canvas = document.getElementById("mainCanvas");
   const ctx = canvas.getContext("2d");
@@ -26,17 +27,21 @@ window.addEventListener("load", function () {
       this.input = new InputHandler(this);
       this.enemyHandler = new EnemyHandler(this);
       this.UIHandler = new UIHandler(this);
+      this.collisionHandler = new CollisionHandler(this);
     }
     update(deltaTime) {
       this.background.update();
       this.player.update(this.input.keys, deltaTime);
       this.enemyHandler.update(deltaTime);
+      this.UIHandler.update();
+      this.collisionHandler.update();
     }
     draw(context) {
       this.background.draw(context);
       this.player.draw(context);
       this.enemyHandler.draw(context);
       this.UIHandler.draw(context);
+      this.collisionHandler.draw(context);
     }
   }
   const game = new Game(canvas.width, canvas.height);

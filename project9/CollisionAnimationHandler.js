@@ -1,4 +1,4 @@
-import { ExplosionCollision } from "./CollisionAnimations";
+import { ExplosionCollision } from "./CollisionAnimations.js";
 
 export class CollisionAnimationHandler {
   constructor(game) {
@@ -6,24 +6,28 @@ export class CollisionAnimationHandler {
     this.currentlyActiveCollisionAnimations = [];
   }
 
-  addExplosionCollision() {
+  addExplosionCollision(enemy) {
     this.currentlyActiveCollisionAnimations.unshift(
-      new ExplosionCollision(this.game)
+      new ExplosionCollision(enemy)
     );
   }
   update() {
-    this.currentlyActiveCollisionAnimations.forEach(
-      (collisionAnimation, index) => {
-        collisionAnimation.update();
-        if (collisionAnimation.markedForDeletion == true) {
-          this.currentlyActiveCollisionAnimations.splice(index, 1);
+    if (this.currentlyActiveCollisionAnimations.length != 0) {
+      this.currentlyActiveCollisionAnimations.forEach(
+        (collisionAnimation, index) => {
+          collisionAnimation.update();
+          if (collisionAnimation.markedForDeletion == true) {
+            this.currentlyActiveCollisionAnimations.splice(index, 1);
+          }
         }
-      }
-    );
+      );
+    }
   }
   draw(context) {
-    this.currentlyActiveCollisionAnimations.forEach((collisionAnimation) => {
-      collisionAnimation.draw(context);
-    });
+    if (this.currentlyActiveCollisionAnimations.length != 0) {
+      this.currentlyActiveCollisionAnimations.forEach((collisionAnimation) => {
+        collisionAnimation.draw(context);
+      });
+    }
   }
 }

@@ -26,7 +26,7 @@ export class Player {
     this.movement.MotionHandling(this, pressedDownKeys);
 
     //COLLiSION HANDLING
-    this.collisionDetection();
+    // this.collisionDetection();
 
     //SPRITE ANIMATION HANDLING
     this.playerSpriteAnimations.deltaTime = deltaTime;
@@ -71,42 +71,42 @@ export class Player {
     );
   }
 
-  collisionDetection() {
-    //player colliding with enemy detection
-    this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
-      if (
-        enemy.posX < this.posX + this.spriteWidth &&
-        enemy.posX > this.posX &&
-        enemy.posY < this.posY + this.spriteHeight &&
-        enemy.posY > this.posY
-      ) {
-        enemy.markedForDeletion = true;
-        if (
-          this.playerStateController.currentState.state == "ROLLING" ||
-          this.playerStateController.currentState.state == "DIVING"
-        ) {
-          this.game.score++;
-        } else {
-          let indexOfGotHit = this.playerStateController.stateNums["GOTHIT"];
-          this.playerStateController.setState(indexOfGotHit);
-        }
-      }
-    });
-    //particles colliding with enemy detection
-    this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
-      this.playerParticleController.currentlyActiveParticles.forEach(
-        (particle) => {
-          if (
-            enemy.posX < particle.posX + particle.size &&
-            enemy.posX > particle.posX &&
-            enemy.posY < particle.posY + particle.size &&
-            enemy.posY > particle.posY
-          ) {
-            enemy.markedForDeletion = true;
-            this.game.score++;
-          }
-        }
-      );
-    });
-  }
+  // collisionDetection() {
+  //   //player colliding with enemy detection
+  //   this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
+  //     if (
+  //       enemy.posX < this.posX + this.spriteWidth &&
+  //       enemy.posX > this.posX &&
+  //       enemy.posY < this.posY + this.spriteHeight &&
+  //       enemy.posY > this.posY
+  //     ) {
+  //       enemy.markedForDeletion = true;
+  //       if (
+  //         this.playerStateController.currentState.state == "ROLLING" ||
+  //         this.playerStateController.currentState.state == "DIVING"
+  //       ) {
+  //         this.game.score++;
+  //       } else {
+  //         let indexOfGotHit = this.playerStateController.stateNums["GOTHIT"];
+  //         this.playerStateController.setState(indexOfGotHit);
+  //       }
+  //     }
+  //   });
+  //   //particles colliding with enemy detection
+  //   this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
+  //     this.playerParticleController.currentlyActiveParticles.forEach(
+  //       (particle) => {
+  //         if (
+  //           enemy.posX < particle.posX + particle.size &&
+  //           enemy.posX > particle.posX &&
+  //           enemy.posY < particle.posY + particle.size &&
+  //           enemy.posY > particle.posY
+  //         ) {
+  //           enemy.markedForDeletion = true;
+  //           this.game.score++;
+  //         }
+  //       }
+  //     );
+  //   });
+  // }
 }
