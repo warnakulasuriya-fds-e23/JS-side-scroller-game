@@ -44,6 +44,8 @@ export class Movement {
   horizontalMotion(player, pressedDownKeys) {
     if (player.playerStateController.currentState.state == "ROLLING") {
       this.setPlayerSpeedMode("FAST");
+    } else if (player.playerStateController.currentState.state == "GOTHIT") {
+      this.setPlayerSpeedMode("STOPPED");
     } else {
       this.setPlayerSpeedMode("NORMAL");
     }

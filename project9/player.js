@@ -72,6 +72,7 @@ export class Player {
   }
 
   collisionDetection() {
+    //player colliding with enemy detection
     this.game.enemyController.currentlyActiveEnemies.forEach((enemy) => {
       if (
         enemy.posX < this.posX + this.spriteWidth &&
@@ -80,9 +81,18 @@ export class Player {
         enemy.posY > this.posY
       ) {
         enemy.markedForDeletion = true;
-        this.game.score++;
+        if (
+          this.playerStateController.currentState.state == "ROLLING" ||
+          this.playerStateController.currentState.state == "DIVING"
+        ) {
+          this.game.score++;
+        } else {
+          let indexOfGotHit = this.playerStateController.stateNums["GOTHIT"];
+          this.playerStateController.setState(indexOfGotHit);
+        }
       }
     });
+    //particles colliding with enemy detection
     this.game.enemyController.currentlyActiveEnemies.forEach((enemy) => {
       this.playerParticleController.currentlyActiveParticles.forEach(
         (particle) => {

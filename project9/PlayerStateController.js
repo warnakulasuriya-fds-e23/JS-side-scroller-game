@@ -1,3 +1,4 @@
+import { stateNums } from "./playerStates.js";
 import {
   Sitting,
   Running,
@@ -6,6 +7,7 @@ import {
   Idling,
   Rolling,
   Diving,
+  GotHit,
 } from "./playerStates.js";
 
 export class PlayerStateController {
@@ -18,12 +20,13 @@ export class PlayerStateController {
       new Idling(player),
       new Rolling(player),
       new Diving(player),
+      new GotHit(player),
     ];
+    this.stateNums = stateNums;
     this.previousState = this.states[4];
     this.currentState = this.states[0];
     this.currentState.activate();
   }
-  transition(stateNum) {}
   setState(stateNum) {
     this.previousState = this.currentState;
     this.currentState = this.states[stateNum];

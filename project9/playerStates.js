@@ -1,4 +1,4 @@
-const stateNums = {
+export const stateNums = {
   SITTING: 0,
   RUNNING: 1,
   JUMPING: 2,
@@ -6,7 +6,7 @@ const stateNums = {
   IDLING: 4,
   ROLLING: 5,
   DIVING: 6,
-  TRANSITIONSTATE: 7,
+  GOTHIT: 7,
 };
 
 class State {
@@ -40,6 +40,7 @@ export class Sitting extends State {
       pressedDownKeys.includes(keySettings["ROLL"]) &&
       !pressedDownKeys.includes(keySettings["CROUCH"])
     ) {
+      console.log("SITTING to ROLLING");
       this.player.playerStateController.setState(stateNums.ROLLING);
     }
   }
@@ -169,6 +170,26 @@ export class Diving extends State {
         this.player.playerStateController.setState(stateNums.SITTING);
       } else {
         this.player.playerStateController.setState(stateNums.ROLLING);
+      }
+    }
+  }
+}
+
+export class GotHit extends State {
+  constructor(player) {
+    super("GOTHIT");
+    this.player = player;
+  }
+  activate() {
+    this.player.playerSpriteAnimations.frameY = 4;
+    this.player.game.speedFraction = 0;
+  }
+  handleKeyBoardInput(pressedDownKeys, keySettings) {
+    if (this.player.playerSpriteAnimations.frameX >= 10) {
+      if (this.player.onGround()) {
+        this.player.playerStateController.setState(stateNums.RUNNING);
+      } else {
+        this.player.playerStateController.setState(stateNums.FALLING);
       }
     }
   }

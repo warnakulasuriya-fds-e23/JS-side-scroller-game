@@ -4,6 +4,9 @@ const totalFramesPerState = {
   JUMPING: 7,
   FALLING: 7,
   IDLING: 7,
+  ROLLING: 7,
+  DIVING: 7,
+  GOTHIT: 11,
 };
 
 export class PlayerSpriteSheetAnimations {
@@ -21,6 +24,8 @@ export class PlayerSpriteSheetAnimations {
   }
 
   animate() {
+    this.playerstate = this.player.playerStateController.currentState.state;
+    this.maxFrames = totalFramesPerState[this.playerstate];
     if (this.frameTimer > this.frameInterval) {
       this.frameTimer = 0;
       if (this.frameX < this.maxFrames - 1) this.frameX++;
