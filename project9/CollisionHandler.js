@@ -48,9 +48,9 @@ export class CollisionHandler {
     });
   }
 
-  update() {
-    this.collisionAnimationHandler.update();
+  update(deltaTime) {
     this.collisionDetection();
+    this.collisionAnimationHandler.update(deltaTime);
   }
   draw(context) {
     this.collisionAnimationHandler.draw(context);

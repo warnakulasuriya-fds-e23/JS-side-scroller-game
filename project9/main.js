@@ -34,7 +34,7 @@ window.addEventListener("load", function () {
       this.player.update(this.input.keys, deltaTime);
       this.enemyHandler.update(deltaTime);
       this.UIHandler.update();
-      this.collisionHandler.update();
+      this.collisionHandler.update(deltaTime);
     }
     draw(context) {
       this.background.draw(context);

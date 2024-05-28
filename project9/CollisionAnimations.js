@@ -6,9 +6,23 @@ export class CollisionAnimation {
     this.frameX = 0;
     this.frameY = 0;
     this.markedForDeletion = false;
+
+    this.fps = 60;
+    this.frameInterval = 1000 / this.fps;
+    this.frameTimer = 0;
   }
-  update() {
+  update(deltaTime) {
     this.posX -= this.game.maxSpeed;
+    if (this.frameTimer > this.frameInterval) {
+      this.frameTimer = 0;
+      this.frameX++;
+    } else {
+      this.frameTimer++;
+    }
+
+    if (this.frameX > this.totalSpriteFrames - 1) {
+      this.markedForDeletion = true;
+    }
   }
   draw(context) {
     context.drawImage(
@@ -31,6 +45,7 @@ export class ExplosionCollision extends CollisionAnimation {
     this.collisionImage = document.getElementById("explosionSprite");
     this.spriteWidth = 100;
     this.spriteHeight = 90;
+    this.totalSpriteFrames = 5;
     this.modifiedWidth = this.spriteWidth * this.sizeModifier;
     this.modifiedHeight = this.spriteHeight * this.sizeModifier;
     this.posX = this.enemy.posX - this.modifiedWidth * 0.5;

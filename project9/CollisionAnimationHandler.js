@@ -11,11 +11,11 @@ export class CollisionAnimationHandler {
       new ExplosionCollision(enemy)
     );
   }
-  update() {
+  update(deltaTime) {
     if (this.currentlyActiveCollisionAnimations.length != 0) {
       this.currentlyActiveCollisionAnimations.forEach(
         (collisionAnimation, index) => {
-          collisionAnimation.update();
+          collisionAnimation.update(deltaTime);
           if (collisionAnimation.markedForDeletion == true) {
             this.currentlyActiveCollisionAnimations.splice(index, 1);
           }
