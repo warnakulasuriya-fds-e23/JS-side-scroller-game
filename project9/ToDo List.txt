@@ -1,3 +1,26 @@
 change
 game.speedFraction to game.gameSpeedFration
 game.maxSpeed to game.gameSpeed
+
+FIX
+collision with the spider_big enemy is a bit weird
+ - what happens is that the way that collision is currently programed, if the "Top left corner "of the enemy sprite box is not inside of
+ the sprit box of the player or particle, then it wont be registered as a collision. This is probably because the spider_bigs sprite box 
+ is so big that it is possible for the other corners {Bottom left, Bottom right, Top right} to enter into the players sprite box
+ without the "Top left corner" ever going into the players sprite box.
+    ***FIX suggestions***
+    1=> make it so that there are several smaller hit boxes inside of the spider_big, this way atleast one hit box will trigger a 
+       collision. 
+       
+       (NOTE on 1=>THIS COULD ALSO BE USED ON LARGE BOSS TYPE MONSTERS TO REGISTER DIFFERENT DAMAGE DONE FOR DIFFERENT REGIONS.)
+    
+    2=> change collsion detection conditions so that it checks for all four corners of a enemy sprite box. If atleast one corner is
+        inside the player sprite box then it would be registered as a hit. 
+        
+        (NOTE on 2=> :This could introduce an ISSUE. The rear side of the playercould much more easily trigger collision. 
+        Like if the player jumps over an enemy while going forward and then goes backward towards the enemy the player would 
+        hit the enemy much faster if the bottom righ corner or the top right corner of the enemy is
+        accounted for as suggested in this method ) 
+
+Future plans
+ADD BOSS ENEMIES

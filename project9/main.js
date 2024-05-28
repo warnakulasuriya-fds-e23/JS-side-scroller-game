@@ -2,8 +2,8 @@ import { KeyBoardConfiguration } from "./KeyboardConfig.js";
 import { Player } from "./player.js";
 import { InputHandler } from "./input.js";
 import { Background } from "./Background.js";
-import { UI } from "./UI.js";
-import { EnemyController } from "./EnemyController.js";
+import { UIHandler } from "./UIHandler.js";
+import { EnemyHandler } from "./EnemyHandler.js";
 window.addEventListener("load", function () {
   const canvas = document.getElementById("mainCanvas");
   const ctx = canvas.getContext("2d");
@@ -17,28 +17,26 @@ window.addEventListener("load", function () {
       this.width = width;
       this.height = height;
       this.score = 0;
-      this.UI = new UI(this);
       this.groundMargin = 80;
       this.speedFraction = 0;
       this.maxSpeed = 5;
+      this.debugMode = false;
       this.background = new Background(this);
       this.player = new Player(this);
-      this.debugMode = false;
       this.input = new InputHandler(this);
-      this.currentlyActiveEnemies = [];
-      this.enemyController = new EnemyController(this);
+      this.enemyHandler = new EnemyHandler(this);
+      this.UIHandler = new UIHandler(this);
     }
     update(deltaTime) {
       this.background.update();
       this.player.update(this.input.keys, deltaTime);
-      //handle enemies
-      this.enemyController.EnemyHandler(deltaTime);
+      this.enemyHandler.update(deltaTime);
     }
     draw(context) {
       this.background.draw(context);
       this.player.draw(context);
-      this.enemyController.DrawEnemies(context);
-      this.UI.draw(context);
+      this.enemyHandler.draw(context);
+      this.UIHandler.draw(context);
     }
   }
   const game = new Game(canvas.width, canvas.height);

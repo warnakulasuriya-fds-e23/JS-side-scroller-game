@@ -73,7 +73,7 @@ export class Player {
 
   collisionDetection() {
     //player colliding with enemy detection
-    this.game.enemyController.currentlyActiveEnemies.forEach((enemy) => {
+    this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
       if (
         enemy.posX < this.posX + this.spriteWidth &&
         enemy.posX > this.posX &&
@@ -93,7 +93,7 @@ export class Player {
       }
     });
     //particles colliding with enemy detection
-    this.game.enemyController.currentlyActiveEnemies.forEach((enemy) => {
+    this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
       this.playerParticleController.currentlyActiveParticles.forEach(
         (particle) => {
           if (

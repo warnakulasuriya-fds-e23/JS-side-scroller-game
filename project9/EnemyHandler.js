@@ -1,5 +1,5 @@
 import { Fly, Plant, Spider_Big } from "./enemy.js";
-export class EnemyController {
+export class EnemyHandler {
   constructor(game) {
     this.game = game;
     this.enemySpawnTimer = 0;
@@ -21,13 +21,7 @@ export class EnemyController {
       1
     );
   }
-
-  DrawEnemies(context) {
-    this.currentlyActiveEnemies.forEach((enemy) => {
-      enemy.draw(context);
-    });
-  }
-  UpdateEnemies(deltaTime) {
+  UpdateAllEnemies(deltaTime) {
     this.currentlyActiveEnemies.forEach((enemy) => {
       enemy.update(deltaTime);
       if (enemy.markedForDeletion == true) {
@@ -35,16 +29,18 @@ export class EnemyController {
       }
     });
   }
-  EnemyHandler(deltaTime) {
+  update(deltaTime) {
     if (this.enemySpawnTimer > this.enemySpawnInterval) {
       this.AddEnemy();
       this.enemySpawnTimer = 0;
     } else {
       this.enemySpawnTimer += deltaTime;
     }
-    this.UpdateEnemies(deltaTime);
+    this.UpdateAllEnemies(deltaTime);
   }
-  //   addEnemy() {
-  //     this.currentlyActiveEnemies.push(new fly(this));
-  //   }
+  draw(context) {
+    this.currentlyActiveEnemies.forEach((enemy) => {
+      enemy.draw(context);
+    });
+  }
 }

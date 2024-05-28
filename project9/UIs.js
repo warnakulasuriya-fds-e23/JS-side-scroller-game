@@ -6,6 +6,7 @@ export class UI {
 
     this.fontColor = "black";
   }
+  update() {}
   draw(context) {
     context.font = this.fontSize + "px " + this.fontFamily;
     context.textAlign = "left";

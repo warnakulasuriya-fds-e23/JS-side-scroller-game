@@ -23,6 +23,7 @@
 #enemy_fly,
 #enemy_plant,
 #enemy_spider_big,
-#fireSprite {
+#fireSprite,
+#explosionSprite {
   display: none;
 }
