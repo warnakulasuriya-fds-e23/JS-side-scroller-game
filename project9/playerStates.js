@@ -21,7 +21,7 @@ export class Sitting extends State {
     this.player = player;
   }
   activate() {
-    this.player.playerSpriteAnimations.frameY = 5;
+    this.player.playerAnimationHandler.frameY = 5;
     this.player.game.speedFraction = 0;
   }
   handleKeyBoardInput(pressedDownKeys, keySettings) {
@@ -52,7 +52,7 @@ export class Running extends State {
     this.player = player;
   }
   activate() {
-    this.player.playerSpriteAnimations.frameY = 3;
+    this.player.playerAnimationHandler.frameY = 3;
     this.player.game.speedFraction = 1;
   }
   handleKeyBoardInput(pressedDownKeys, keySettings) {
@@ -72,7 +72,7 @@ export class Jumping extends State {
     this.player = player;
   }
   activate() {
-    this.player.playerSpriteAnimations.frameY = 1;
+    this.player.playerAnimationHandler.frameY = 1;
     this.player.game.speedFraction = 1;
   }
   handleKeyBoardInput(pressedDownKeys, keySettings) {
@@ -92,7 +92,7 @@ export class Falling extends State {
     this.player = player;
   }
   activate() {
-    this.player.playerSpriteAnimations.frameY = 2;
+    this.player.playerAnimationHandler.frameY = 2;
     this.player.game.speedFraction = 1;
   }
   handleKeyBoardInput(pressedDownKeys, keySettings) {
@@ -117,7 +117,7 @@ export class Idling extends State {
     this.player = player;
   }
   activate() {
-    this.player.playerSpriteAnimations.frameY = 0;
+    this.player.playerAnimationHandler.frameY = 0;
     this.player.game.speedFraction = 0;
   }
   handleKeyBoardInput(pressedDownKeys, keySettings) {
@@ -140,7 +140,7 @@ export class Rolling extends State {
     this.player = player;
   }
   activate() {
-    this.player.playerSpriteAnimations.frameY = 6;
+    this.player.playerAnimationHandler.frameY = 6;
     this.player.game.speedFraction = 1;
   }
   handleKeyBoardInput(pressedDownKeys, keySettings) {
@@ -160,7 +160,7 @@ export class Diving extends State {
     this.player = player;
   }
   activate() {
-    this.player.playerSpriteAnimations.frameY = 6;
+    this.player.playerAnimationHandler.frameY = 6;
     this.player.game.speedFraction = 1;
   }
   handleKeyBoardInput(pressedDownKeys, keySettings) {
@@ -181,11 +181,11 @@ export class GotHit extends State {
     this.player = player;
   }
   activate() {
-    this.player.playerSpriteAnimations.frameY = 4;
+    this.player.playerAnimationHandler.frameY = 4;
     this.player.game.speedFraction = 0;
   }
   handleKeyBoardInput(pressedDownKeys, keySettings) {
-    if (this.player.playerSpriteAnimations.frameX >= 10) {
+    if (this.player.playerAnimationHandler.frameX >= 10) {
       if (this.player.onGround()) {
         this.player.playerStateController.setState(stateNums.RUNNING);
       } else {

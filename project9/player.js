@@ -1,5 +1,5 @@
 import { Movement } from "./Movement.js";
-import { PlayerSpriteSheetAnimations } from "./playerSpriteSheetAnimation.js";
+import { PlayerAnimationHandler } from "./playerAnimationHandler.js";
 import { PlayerStateController } from "./PlayerStateController.js";
 import { PlayerParticleController } from "./PlayerParticleController.js";
 export class Player {
@@ -13,12 +13,12 @@ export class Player {
     this.playerHealth = 100;
     this.playerEnergy = 200;
     this.movement = new Movement(game);
-    this.playerSpriteAnimations = new PlayerSpriteSheetAnimations(this);
+    this.playerAnimationHandler = new PlayerAnimationHandler(this);
     this.playerStateController = new PlayerStateController(this);
     this.playerParticleController = new PlayerParticleController(this);
   }
   update(pressedDownKeys, deltaTime) {
-    //STATE HANDING
+    //STATE HANDLING
     this.playerStateController.currentState.handleKeyBoardInput(
       pressedDownKeys,
       this.game.keyboardConfig.keySettings
@@ -27,14 +27,9 @@ export class Player {
     //MOVEMENT HANDLING
     this.movement.MotionHandling(this, pressedDownKeys);
 
-    //COLLiSION HANDLING
-    // this.collisionDetection();
-
     //SPRITE ANIMATION HANDLING
-    this.playerSpriteAnimations.deltaTime = deltaTime;
-    this.playerSpriteAnimations.playerState =
-      this.playerStateController.currentState.state;
-    this.playerSpriteAnimations.animate();
+
+    this.playerAnimationHandler.update(deltaTime);
 
     //PARTICLES HANDLING
     this.playerParticleController.update();
@@ -52,8 +47,8 @@ export class Player {
     }
     context.drawImage(
       this.spriteSheet,
-      this.playerSpriteAnimations.frameX * this.spriteWidth,
-      this.playerSpriteAnimations.frameY * this.spriteHeight,
+      this.playerAnimationHandler.frameX * this.spriteWidth,
+      this.playerAnimationHandler.frameY * this.spriteHeight,
       this.spriteWidth,
       this.spriteHeight,
       this.posX,
@@ -72,43 +67,4 @@ export class Player {
       this.posY >= this.game.height - this.spriteHeight - this.game.groundMargin
     );
   }
-
-  // collisionDetection() {
-  //   //player colliding with enemy detection
-  //   this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
-  //     if (
-  //       enemy.posX < this.posX + this.spriteWidth &&
-  //       enemy.posX > this.posX &&
-  //       enemy.posY < this.posY + this.spriteHeight &&
-  //       enemy.posY > this.posY
-  //     ) {
-  //       enemy.markedForDeletion = true;
-  //       if (
-  //         this.playerStateController.currentState.state == "ROLLING" ||
-  //         this.playerStateController.currentState.state == "DIVING"
-  //       ) {
-  //         this.game.score++;
-  //       } else {
-  //         let indexOfGotHit = this.playerStateController.stateNums["GOTHIT"];
-  //         this.playerStateController.setState(indexOfGotHit);
-  //       }
-  //     }
-  //   });
-  //   //particles colliding with enemy detection
-  //   this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
-  //     this.playerParticleController.currentlyActiveParticles.forEach(
-  //       (particle) => {
-  //         if (
-  //           enemy.posX < particle.posX + particle.size &&
-  //           enemy.posX > particle.posX &&
-  //           enemy.posY < particle.posY + particle.size &&
-  //           enemy.posY > particle.posY
-  //         ) {
-  //           enemy.markedForDeletion = true;
-  //           this.game.score++;
-  //         }
-  //       }
-  //     );
-  //   });
-  // }
 }

@@ -9,7 +9,7 @@ const totalFramesPerState = {
   GOTHIT: 11,
 };
 
-export class PlayerSpriteSheetAnimations {
+export class PlayerAnimationHandler {
   constructor(player) {
     this.player = player;
     this.frameX = 0;
@@ -33,5 +33,9 @@ export class PlayerSpriteSheetAnimations {
     } else {
       this.frameTimer += this.deltaTime;
     }
+  }
+  update(deltaTime) {
+    this.deltaTime = deltaTime;
+    this.animate();
   }
 }
