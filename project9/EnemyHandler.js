@@ -13,7 +13,9 @@ export class EnemyHandler {
     if (this.game.speedFraction > 0 && Math.random() > 0.6) {
       this.currentlyActiveEnemies.push(new Spider_Big(this.game));
     }
-    this.currentlyActiveEnemies.push(new Fly(this.game));
+    if (this.game.speedFraction > 0 && Math.random() > 0.5) {
+      this.currentlyActiveEnemies.push(new Fly(this.game));
+    }
   }
   RemoveEnemy(enemy) {
     this.currentlyActiveEnemies.splice(

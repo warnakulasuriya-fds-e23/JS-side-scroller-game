@@ -161,7 +161,6 @@ export class HitPopup extends UIComponent {
     }
   }
   draw(context) {
-    console.log(this.posY);
     context.save();
     context.font = this.fontSize + "px " + this.fontFamily;
     context.textAlign = "center";

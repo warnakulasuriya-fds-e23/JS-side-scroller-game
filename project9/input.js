@@ -25,6 +25,10 @@ export class InputHandler {
       }
     });
     window.addEventListener("keyup", (e) => {
+      if (e.key == this.keySettings["JUMP"]) {
+        this.game.player.playerMovementHandler.interuptJump();
+      }
+
       if (
         e.key == this.keySettings["JUMP"] ||
         e.key == this.keySettings["CROUCH"] ||

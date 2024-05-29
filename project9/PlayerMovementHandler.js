@@ -68,6 +68,13 @@ export class PlayerMovementHandler {
     this.boundaryHandling(player);
   }
 
+  interuptJump() {
+    console.log("Called");
+    /*will be executed if the player releases the jump button
+    intended effect of interrupting the jump midway, is to make it so that 
+    the longer the user presses Jump the higher the character will jump*/
+    this.yVelocity = 0;
+  }
   //PLEASE NOTE!! : here we are dealing with an inverted y-axis
   verticalMotion(player, pressedDownKeys) {
     if (player.playerStateHandler.currentState.state == "DIVING") {
@@ -77,14 +84,14 @@ export class PlayerMovementHandler {
       player.onGround() &&
       !pressedDownKeys.includes(this.keySettings["CROUCH"])
     ) {
-      this.yVelocity = -30;
+      this.yVelocity = -25;
     }
 
     player.posY += this.yVelocity; //motion along y axis
 
     if (!player.onGround()) {
       this.yVelocity += this.g; //the is deceleration taking place (the g is added and not subtracted because y axis is inverted)
-    } else this.yVelocity = 0; //final velocity (stops player from falling throught the floor)
+    } else this.yVelocity = 0; //final velocity (stops player from falling through the floor)
 
     this.boundaryHandling(player);
   }
