@@ -14,6 +14,9 @@ export class PlayerEnergyHandler {
   constructor(player) {
     this.player = player;
     this.playerEnergy = 200;
+    this.maxEnergy = 200;
+    this.energyPercent = (this.playerEnergy / this.maxEnergy) * 100;
+    this.regeneration = 0.25;
   }
 
   singleShotAttack(currentStateName) {
@@ -23,13 +26,14 @@ export class PlayerEnergyHandler {
     this.playerEnergy -= FullAutoAttackCosts[currentStateName];
   }
   update() {
+    this.energyPercent = (this.playerEnergy / this.maxEnergy) * 100;
     let currentPlayerStateName =
       this.player.playerStateHandler.currentState.state;
     if (_FullAutoAttacks.includes(currentPlayerStateName)) {
       this.fullAutoAttack(currentPlayerStateName);
     } else {
       if (this.playerEnergy < 200) {
-        this.playerEnergy += 0.1;
+        this.playerEnergy += this.regeneration;
       }
     }
   }

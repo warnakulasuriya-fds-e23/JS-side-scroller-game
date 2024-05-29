@@ -36,7 +36,7 @@ export class HealthComponenet extends UIComponent {
     context.fillStyle = this.HealthBarColor();
     context.fillRect(
       100,
-      this.verticalGap / 2,
+      this.verticalGap * 0 + 8,
       200 * (this.healthPercent / 100),
       10
     );
@@ -50,19 +50,27 @@ export class EnergyComponent extends UIComponent {
     this.fontSize = 20;
     this.fontFamily = "Arial";
     this.fontColor = "black";
+    this.energyPercent = this.game.player.playerEnergyHandler.energyPercent;
   }
-  update() {}
+  update() {
+    this.energyPercent = this.game.player.playerEnergyHandler.energyPercent;
+  }
   draw(context) {
     context.save();
     context.font = this.fontSize + "px " + this.fontFamily;
     context.textAlign = "left";
     context.fillStyle = this.fontColor;
     context.fillText(
-      "Energy : <" +
-        this.player.playerEnergyHandler.playerEnergy.toFixed(0) +
-        ">",
+      "Energy:(" + "                                      " + ")",
       20,
       this.verticalGap * 2
+    );
+    context.fillStyle = "blue";
+    context.fillRect(
+      100,
+      this.verticalGap * 1 + 8,
+      200 * (this.energyPercent / 100),
+      10
     );
     context.restore();
   }
