@@ -7,6 +7,7 @@ export class KeyBoardConfiguration {
       CROUCH: "ArrowDown",
       ROLL: "r",
       DEBUGMODE: "d",
+      PAUSE: "Escape",
     };
   }
   //implement setters to configure buttons for relevant key press

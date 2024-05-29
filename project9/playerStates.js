@@ -140,11 +140,22 @@ export class Rolling extends State {
     this.player = player;
   }
   activate() {
-    this.player.playerAnimationHandler.frameY = 6;
-    this.player.game.speedFraction = 1;
+    if (this.player.playerEnergyHandler.playerEnergy > 20) {
+      this.player.playerAnimationHandler.frameY = 6;
+      this.player.game.speedFraction = 1;
+    } else {
+      if (this.player.onGround()) {
+        this.player.playerStateHandler.setState(stateNums.RUNNING);
+      } else {
+        this.player.playerStateHandler.setState(stateNums.FALLING);
+      }
+    }
   }
   update(pressedDownKeys, keySettings) {
-    if (!pressedDownKeys.includes(keySettings["ROLL"])) {
+    if (
+      !pressedDownKeys.includes(keySettings["ROLL"]) ||
+      this.player.playerEnergyHandler.playerEnergy < 10
+    ) {
       if (this.player.onGround()) {
         this.player.playerStateHandler.setState(stateNums.RUNNING);
       } else {
@@ -160,8 +171,17 @@ export class Diving extends State {
     this.player = player;
   }
   activate() {
-    this.player.playerAnimationHandler.frameY = 6;
-    this.player.game.speedFraction = 1;
+    if (this.player.playerEnergyHandler.playerEnergy > 50) {
+      this.player.playerEnergyHandler.singleShotAttack(this.state);
+      this.player.playerAnimationHandler.frameY = 6;
+      this.player.game.speedFraction = 1;
+    } else {
+      if (this.player.onGround()) {
+        this.player.playerStateHandler.setState(stateNums.RUNNING);
+      } else {
+        this.player.playerStateHandler.setState(stateNums.FALLING);
+      }
+    }
   }
   update(pressedDownKeys, keySettings) {
     if (this.player.onGround()) {

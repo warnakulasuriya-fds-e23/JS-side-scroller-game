@@ -4,6 +4,7 @@ export class InputHandler {
     this.keySettings = this.game.keyboardConfig.keySettings;
     this.keys = [];
     window.addEventListener("keydown", (e) => {
+      console.log(e.key);
       if (
         (e.key == this.keySettings["JUMP"] ||
           e.key == this.keySettings["CROUCH"] ||
@@ -15,6 +16,13 @@ export class InputHandler {
         this.keys.push(e.key);
       } else if (e.key == this.keySettings["DEBUGMODE"]) {
         this.game.debugMode = !this.game.debugMode;
+      }
+
+      if (e.key == this.keySettings["PAUSE"]) {
+        this.game.paused = !this.game.paused;
+        if (this.game.paused) {
+          this.game.UIHandler.pauseScreen();
+        }
       }
     });
     window.addEventListener("keyup", (e) => {

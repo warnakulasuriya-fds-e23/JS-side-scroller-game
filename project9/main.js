@@ -6,7 +6,7 @@ import { UIHandler } from "./UIHandler.js";
 import { EnemyHandler } from "./EnemyHandler.js";
 import { CollisionHandler } from "./CollisionHandler.js";
 window.addEventListener("load", function () {
-  const canvas = document.getElementById("mainCanvas");
+  const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
   canvas.width = 500;
   canvas.height = 500;
@@ -15,6 +15,7 @@ window.addEventListener("load", function () {
   class Game {
     constructor(width, height) {
       this.keyboardConfig = new KeyBoardConfiguration();
+      this.paused = false;
       this.width = width;
       this.height = height;
       this.score = 0;
@@ -51,9 +52,11 @@ window.addEventListener("load", function () {
   function animate(timeStamp) {
     let deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    game.update(deltaTime);
-    game.draw(ctx);
+    if (game.paused == false) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      game.update(deltaTime);
+      game.draw(ctx);
+    }
 
     requestAnimationFrame(animate); //this function passes the current time stamp to the animate function automatically
   }

@@ -66,4 +66,45 @@ export class HealthComponenet extends UIComponent {
   }
 }
 
-export class EnergyComponent extends UIComponent {}
+export class EnergyComponent extends UIComponent {
+  constructor(game) {
+    super(game);
+    this.fontSize = 40;
+    this.fontFamily = "Arial";
+    this.fontColor = "black";
+  }
+  update() {}
+  draw(context) {
+    context.save();
+    context.font = this.fontSize + "px " + this.fontFamily;
+    context.textAlign = "left";
+    context.fillStyle = this.fontColor;
+    context.fillText(
+      "Energy : <" +
+        this.player.playerEnergyHandler.playerEnergy.toFixed(0) +
+        ">",
+      20,
+      140
+    );
+    context.restore();
+  }
+}
+
+export class PauseScreen extends UIComponent {
+  constructor(game) {
+    super(game);
+    this.fontSize = 100;
+    this.fontFamily = "Arial";
+    this.fontColor = "red";
+  }
+  Actitavte() {
+    let canvas = document.getElementById("gameCanvas");
+    let context = canvas.getContext("2d");
+    context.save();
+    context.font = this.fontSize + "px " + this.fontFamily;
+    context.textAlign = "center";
+    context.fillStyle = this.fontColor;
+    context.fillText("-PAUSED-", 250, 300);
+    context.restore();
+  }
+}

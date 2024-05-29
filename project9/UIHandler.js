@@ -1,4 +1,10 @@
-import { ScoreComponent, TimeComponent, HealthComponenet } from "./UIs.js";
+import {
+  ScoreComponent,
+  TimeComponent,
+  HealthComponenet,
+  EnergyComponent,
+  PauseScreen,
+} from "./UIs.js";
 export class UIHandler {
   constructor(game) {
     this.game = game;
@@ -6,6 +12,7 @@ export class UIHandler {
       new ScoreComponent(game),
       new TimeComponent(game),
       new HealthComponenet(game),
+      new EnergyComponent(game),
     ];
   }
   update() {
@@ -17,5 +24,9 @@ export class UIHandler {
     this.currentlyActiveUIComponents.forEach((UIComp) => {
       UIComp.draw(context);
     });
+  }
+  pauseScreen() {
+    let pauseScreen = new PauseScreen(this.game);
+    pauseScreen.Actitavte();
   }
 }
