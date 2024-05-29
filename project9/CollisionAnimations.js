@@ -7,7 +7,7 @@ export class CollisionAnimation {
     this.frameY = 0;
     this.markedForDeletion = false;
 
-    this.fps = 60;
+    this.fps = 200;
     this.frameInterval = 1000 / this.fps;
     this.frameTimer = 0;
   }

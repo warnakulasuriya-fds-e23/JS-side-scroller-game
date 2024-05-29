@@ -18,6 +18,7 @@ window.addEventListener("load", function () {
       this.width = width;
       this.height = height;
       this.score = 0;
+      this.gameTime = 0;
       this.groundMargin = 80;
       this.speedFraction = 0;
       this.maxSpeed = 5;
@@ -30,6 +31,7 @@ window.addEventListener("load", function () {
       this.collisionHandler = new CollisionHandler(this);
     }
     update(deltaTime) {
+      this.gameTime += deltaTime;
       this.background.update();
       this.player.update(this.input.keys, deltaTime);
       this.enemyHandler.update(deltaTime);
@@ -53,7 +55,7 @@ window.addEventListener("load", function () {
     game.update(deltaTime);
     game.draw(ctx);
 
-    requestAnimationFrame(animate); //this function passes the current time stamp to the animate function
+    requestAnimationFrame(animate); //this function passes the current time stamp to the animate function automatically
   }
   animate(0);
 });

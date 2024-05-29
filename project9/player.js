@@ -10,6 +10,8 @@ export class Player {
     this.posX = 0;
     this.posY = this.game.height - this.spriteHeight - this.game.groundMargin;
     this.spriteSheet = document.getElementById("playerSprites");
+    this.playerHealth = 100;
+    this.playerEnergy = 200;
     this.movement = new Movement(game);
     this.playerSpriteAnimations = new PlayerSpriteSheetAnimations(this);
     this.playerStateController = new PlayerStateController(this);
