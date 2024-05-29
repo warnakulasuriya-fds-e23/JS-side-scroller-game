@@ -15,10 +15,10 @@ export class HealthComponenet extends UIComponent {
     this.healthPercent = this.game.player.playerHealthHandler.HealthPercentage;
   }
   HealthBarColor() {
-    if (this.healthPercent > 75) return "green";
-    else if (this.healthPercent > 50) return "yellow";
-    else if (this.healthPercent > 25) return "orange";
-    else return "red";
+    if (this.healthPercent > 75) return "#009900";
+    else if (this.healthPercent > 50) return "#ffff00";
+    else if (this.healthPercent > 25) return "#ec9513";
+    else return "#cc0000";
   }
   update() {
     this.healthPercent = this.game.player.playerHealthHandler.HealthPercentage;
@@ -40,6 +40,7 @@ export class HealthComponenet extends UIComponent {
       200 * (this.healthPercent / 100),
       10
     );
+
     context.restore();
   }
 }
@@ -65,7 +66,7 @@ export class EnergyComponent extends UIComponent {
       20,
       this.verticalGap * 2
     );
-    context.fillStyle = "blue";
+    context.fillStyle = "#4106ba";
     context.fillRect(
       100,
       this.verticalGap * 1 + 8,
@@ -79,7 +80,7 @@ export class EnergyComponent extends UIComponent {
 export class ScoreComponent extends UIComponent {
   constructor(game) {
     super(game);
-    this.fontSize = 20;
+    this.fontSize = 18;
     this.fontFamily = "Arial";
     this.fontColor = "black";
   }
@@ -89,11 +90,9 @@ export class ScoreComponent extends UIComponent {
     context.font = this.fontSize + "px " + this.fontFamily;
     context.textAlign = "left";
     context.fillStyle = this.fontColor;
-    context.fillText(
-      "Score : <" + this.game.score + ">",
-      20,
-      this.verticalGap * 3
-    );
+    context.fillText("Score    :", 20, this.verticalGap * 3);
+    context.fillStyle = "#0099ff";
+    context.fillText("<" + this.game.score + ">", 100, this.verticalGap * 3);
     context.restore();
   }
 }
@@ -101,7 +100,7 @@ export class ScoreComponent extends UIComponent {
 export class TimeComponent extends UIComponent {
   constructor(game) {
     super(game);
-    this.fontSize = 20;
+    this.fontSize = 18;
     this.fontFamily = "Arial";
     this.fontColor = "black";
   }
@@ -118,9 +117,10 @@ export class TimeComponent extends UIComponent {
     context.font = this.fontSize + "px " + this.fontFamily;
     context.textAlign = "left";
     context.fillStyle = this.fontColor;
+    context.fillText("Time      : ", 20, this.verticalGap * 4);
     context.fillText(
-      "Time : <" + this.timeToDisplay() + ">",
-      20,
+      "<" + this.timeToDisplay() + ">",
+      100,
       this.verticalGap * 4
     );
     context.restore();

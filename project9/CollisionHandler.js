@@ -6,6 +6,15 @@ export class CollisionHandler {
     this.player = game.player;
     this.collisionAnimationHandler = new CollisionAnimationHandler(game);
   }
+  increaseScoreAccordingToEnemy(enemy) {
+    if (enemy.name == "Fly") {
+      this.game.score += 1;
+    } else if (enemy.name == "Plant") {
+      this.game.score += 2;
+    } else if (enemy.name == "Spider_Big") {
+      this.game.score += 3;
+    }
+  }
   collisionDetection() {
     //player colliding with enemy detection
     this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
@@ -21,7 +30,7 @@ export class CollisionHandler {
           this.player.playerStateHandler.currentState.state == "ROLLING" ||
           this.player.playerStateHandler.currentState.state == "DIVING"
         ) {
-          this.game.score++;
+          this.increaseScoreAccordingToEnemy(enemy);
         } else {
           this.player.playerHealthHandler.playerHealth -= 5;
           let indexOfGotHit =
@@ -42,7 +51,7 @@ export class CollisionHandler {
           ) {
             enemy.markedForDeletion = true;
             this.collisionAnimationHandler.addExplosionCollision(enemy);
-            this.game.score++;
+            this.increaseScoreAccordingToEnemy(enemy);
           }
         }
       );

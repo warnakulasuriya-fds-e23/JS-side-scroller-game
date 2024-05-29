@@ -65,6 +65,7 @@ class FlyingEnemy extends Enemy {
 export class Fly extends FlyingEnemy {
   constructor(game) {
     super(game);
+    this.name = "Fly";
     this.spriteWidth = 60;
     this.spirteHeight = 44;
     this.posX = this.spawnX; //starts at spawn point
@@ -93,6 +94,7 @@ class GroundEnemy extends Enemy {
 export class Plant extends GroundEnemy {
   constructor(game) {
     super(game);
+    this.name = "Plant";
     this.spriteWidth = 60;
     this.spirteHeight = 87;
     this.enemyImage = document.getElementById("enemy_plant");
@@ -118,6 +120,7 @@ class ClimbingEnemy extends Enemy {
 export class Spider_Big extends ClimbingEnemy {
   constructor(game) {
     super(game);
+    this.name = "Spider_Big";
     this.spriteWidth = 120;
     this.spirteHeight = 144;
     this.posX = this.spawnX;
