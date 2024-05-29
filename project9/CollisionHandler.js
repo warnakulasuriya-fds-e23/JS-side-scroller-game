@@ -23,7 +23,7 @@ export class CollisionHandler {
         ) {
           this.game.score++;
         } else {
-          this.player.playerHealth -= 5;
+          this.player.playerHealthHandler.playerHealth -= 5;
           let indexOfGotHit =
             this.player.playerStateHandler.stateNums["GOTHIT"];
           this.player.playerStateHandler.setState(indexOfGotHit);

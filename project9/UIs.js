@@ -2,13 +2,52 @@ class UIComponent {
   constructor(game) {
     this.game = game;
     this.player = game.player;
+    this.verticalGap = 20;
   }
 }
 
-export class ScoreComponent extends UIComponent {
+export class HealthComponenet extends UIComponent {
   constructor(game) {
     super(game);
-    this.fontSize = 40;
+    this.fontSize = 20;
+    this.fontFamily = "Arial";
+    this.fontColor = "black";
+    this.healthPercent = this.game.player.playerHealthHandler.HealthPercentage;
+  }
+  HealthBarColor() {
+    if (this.healthPercent > 75) return "green";
+    else if (this.healthPercent > 50) return "yellow";
+    else if (this.healthPercent > 25) return "orange";
+    else return "red";
+  }
+  update() {
+    this.healthPercent = this.game.player.playerHealthHandler.HealthPercentage;
+  }
+  draw(context) {
+    context.save();
+    context.font = this.fontSize + "px " + this.fontFamily;
+    context.textAlign = "left";
+    context.fillStyle = this.fontColor;
+    context.fillText(
+      "Health :(" + "                                      " + ")",
+      20,
+      this.verticalGap
+    );
+    context.fillStyle = this.HealthBarColor();
+    context.fillRect(
+      100,
+      this.verticalGap / 2,
+      200 * (this.healthPercent / 100),
+      10
+    );
+    context.restore();
+  }
+}
+
+export class EnergyComponent extends UIComponent {
+  constructor(game) {
+    super(game);
+    this.fontSize = 20;
     this.fontFamily = "Arial";
     this.fontColor = "black";
   }
@@ -18,7 +57,35 @@ export class ScoreComponent extends UIComponent {
     context.font = this.fontSize + "px " + this.fontFamily;
     context.textAlign = "left";
     context.fillStyle = this.fontColor;
-    context.fillText("Score : <" + this.game.score + ">", 20, 50);
+    context.fillText(
+      "Energy : <" +
+        this.player.playerEnergyHandler.playerEnergy.toFixed(0) +
+        ">",
+      20,
+      this.verticalGap * 2
+    );
+    context.restore();
+  }
+}
+
+export class ScoreComponent extends UIComponent {
+  constructor(game) {
+    super(game);
+    this.fontSize = 20;
+    this.fontFamily = "Arial";
+    this.fontColor = "black";
+  }
+  update() {}
+  draw(context) {
+    context.save();
+    context.font = this.fontSize + "px " + this.fontFamily;
+    context.textAlign = "left";
+    context.fillStyle = this.fontColor;
+    context.fillText(
+      "Score : <" + this.game.score + ">",
+      20,
+      this.verticalGap * 3
+    );
     context.restore();
   }
 }
@@ -26,7 +93,7 @@ export class ScoreComponent extends UIComponent {
 export class TimeComponent extends UIComponent {
   constructor(game) {
     super(game);
-    this.fontSize = 40;
+    this.fontSize = 20;
     this.fontFamily = "Arial";
     this.fontColor = "black";
   }
@@ -43,48 +110,10 @@ export class TimeComponent extends UIComponent {
     context.font = this.fontSize + "px " + this.fontFamily;
     context.textAlign = "left";
     context.fillStyle = this.fontColor;
-    context.fillText("Time : <" + this.timeToDisplay() + ">", 20, 80);
-    context.restore();
-  }
-}
-
-export class HealthComponenet extends UIComponent {
-  constructor(game) {
-    super(game);
-    this.fontSize = 40;
-    this.fontFamily = "Arial";
-    this.fontColor = "black";
-  }
-  update() {}
-  draw(context) {
-    context.save();
-    context.font = this.fontSize + "px " + this.fontFamily;
-    context.textAlign = "left";
-    context.fillStyle = this.fontColor;
-    context.fillText("Health : <" + this.player.playerHealth + ">", 20, 110);
-    context.restore();
-  }
-}
-
-export class EnergyComponent extends UIComponent {
-  constructor(game) {
-    super(game);
-    this.fontSize = 40;
-    this.fontFamily = "Arial";
-    this.fontColor = "black";
-  }
-  update() {}
-  draw(context) {
-    context.save();
-    context.font = this.fontSize + "px " + this.fontFamily;
-    context.textAlign = "left";
-    context.fillStyle = this.fontColor;
     context.fillText(
-      "Energy : <" +
-        this.player.playerEnergyHandler.playerEnergy.toFixed(0) +
-        ">",
+      "Time : <" + this.timeToDisplay() + ">",
       20,
-      140
+      this.verticalGap * 4
     );
     context.restore();
   }

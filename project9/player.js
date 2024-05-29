@@ -2,6 +2,7 @@ import { PlayerMovementHandler } from "./PlayerMovementHandler.js";
 import { PlayerAnimationHandler } from "./playerAnimationHandler.js";
 import { PlayerStateHandler } from "./PlayerStateHandler.js";
 import { PlayerParticleHandler } from "./PlayerParticleHandler.js";
+import { PlayerHealthHandler } from "./PlayerHealthHandler.js";
 import { PlayerEnergyHandler } from "./PlayerEnergyHandler.js";
 export class Player {
   constructor(game) {
@@ -13,6 +14,7 @@ export class Player {
     this.posY = this.game.height - this.spriteHeight - this.game.groundMargin;
     this.spriteSheet = document.getElementById("playerSprites");
     this.playerHealth = 100;
+    this.playerHealthHandler = new PlayerHealthHandler(this);
     this.playerEnergyHandler = new PlayerEnergyHandler(this);
     this.playerMovementHandler = new PlayerMovementHandler(this);
     this.playerAnimationHandler = new PlayerAnimationHandler(this);
@@ -24,6 +26,7 @@ export class Player {
     this.playerMovementHandler.update(this, pressedDownKeys);
     this.playerAnimationHandler.update(deltaTime);
     this.playerEnergyHandler.update();
+    this.playerHealthHandler.update();
     this.playerParticleHandler.update();
   }
 
