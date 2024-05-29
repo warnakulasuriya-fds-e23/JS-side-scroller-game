@@ -18,21 +18,21 @@ export class CollisionHandler {
         enemy.markedForDeletion = true;
         this.collisionAnimationHandler.addExplosionCollision(enemy);
         if (
-          this.player.playerStateController.currentState.state == "ROLLING" ||
-          this.player.playerStateController.currentState.state == "DIVING"
+          this.player.playerStateHandler.currentState.state == "ROLLING" ||
+          this.player.playerStateHandler.currentState.state == "DIVING"
         ) {
           this.game.score++;
         } else {
           this.player.playerHealth -= 5;
           let indexOfGotHit =
-            this.player.playerStateController.stateNums["GOTHIT"];
-          this.player.playerStateController.setState(indexOfGotHit);
+            this.player.playerStateHandler.stateNums["GOTHIT"];
+          this.player.playerStateHandler.setState(indexOfGotHit);
         }
       }
     });
     //particles colliding with enemy detection
     this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
-      this.player.playerParticleController.currentlyActiveParticles.forEach(
+      this.player.playerParticleHandler.currentlyActiveParticles.forEach(
         (particle) => {
           if (
             enemy.posX < particle.posX + particle.size &&

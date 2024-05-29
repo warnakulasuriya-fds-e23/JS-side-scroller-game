@@ -4,7 +4,7 @@ import {
   SplashParticle,
 } from "./PlayerParticles.js";
 
-export class PlayerParticleController {
+export class PlayerParticleHandler {
   constructor(player) {
     this.player = player;
     this.currentlyActiveParticles = [];

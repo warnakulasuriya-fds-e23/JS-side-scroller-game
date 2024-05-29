@@ -1,7 +1,7 @@
 import { PlayerMovementHandler } from "./PlayerMovementHandler.js";
 import { PlayerAnimationHandler } from "./playerAnimationHandler.js";
 import { PlayerStateHandler } from "./PlayerStateHandler.js";
-import { PlayerParticleController } from "./PlayerParticleController.js";
+import { PlayerParticleHandler } from "./PlayerParticleHandler.js";
 export class Player {
   constructor(game) {
     this.game = game;
@@ -16,14 +16,14 @@ export class Player {
     this.playerMovementHandler = new PlayerMovementHandler(this);
     this.playerAnimationHandler = new PlayerAnimationHandler(this);
     this.playerStateHandler = new PlayerStateHandler(this);
-    this.playerParticleController = new PlayerParticleController(this);
+    this.playerParticleHandler = new PlayerParticleHandler(this);
   }
   update(pressedDownKeys, deltaTime) {
     //STATE HANDLING
     this.playerStateHandler.update(pressedDownKeys);
     this.playerMovementHandler.update(this, pressedDownKeys);
     this.playerAnimationHandler.update(deltaTime);
-    this.playerParticleController.update();
+    this.playerParticleHandler.update();
   }
 
   draw(context) {
@@ -48,7 +48,7 @@ export class Player {
       this.spriteHeight
     );
 
-    this.playerParticleController.draw(context);
+    this.playerParticleHandler.draw(context);
   }
 
   onGround() {
