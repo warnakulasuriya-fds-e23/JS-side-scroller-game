@@ -30,11 +30,9 @@ export class PlayerParticleController {
     }
   }
   update() {
-    if (this.player.playerStateController.currentState.state == "RUNNING") {
+    if (this.player.playerStateHandler.currentState.state == "RUNNING") {
       this.addDustParticle();
-    } else if (
-      this.player.playerStateController.currentState.state == "ROLLING"
-    ) {
+    } else if (this.player.playerStateHandler.currentState.state == "ROLLING") {
       this.addFireParticle();
     }
 

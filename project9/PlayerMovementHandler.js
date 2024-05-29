@@ -43,9 +43,9 @@ export class PlayerMovementHandler {
     }
   }
   horizontalMotion(player, pressedDownKeys) {
-    if (player.playerStateController.currentState.state == "ROLLING") {
+    if (player.playerStateHandler.currentState.state == "ROLLING") {
       this.setPlayerSpeedMode("FAST");
-    } else if (player.playerStateController.currentState.state == "GOTHIT") {
+    } else if (player.playerStateHandler.currentState.state == "GOTHIT") {
       this.setPlayerSpeedMode("STOPPED");
     } else {
       this.setPlayerSpeedMode("NORMAL");
@@ -70,7 +70,7 @@ export class PlayerMovementHandler {
 
   //PLEASE NOTE!! : here we are dealing with an inverted y-axis
   verticalMotion(player, pressedDownKeys) {
-    if (player.playerStateController.currentState.state == "DIVING") {
+    if (player.playerStateHandler.currentState.state == "DIVING") {
       this.yVelocity = 40;
     } else if (
       pressedDownKeys.includes(this.keySettings["JUMP"]) &&

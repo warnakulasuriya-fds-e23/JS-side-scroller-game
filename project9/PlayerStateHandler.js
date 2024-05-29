@@ -10,8 +10,9 @@ import {
   GotHit,
 } from "./playerStates.js";
 
-export class PlayerStateController {
+export class PlayerStateHandler {
   constructor(player) {
+    this.player = player;
     this.states = [
       new Sitting(player),
       new Running(player),
@@ -31,5 +32,12 @@ export class PlayerStateController {
     this.previousState = this.currentState;
     this.currentState = this.states[stateNum];
     this.currentState.activate();
+  }
+
+  update(pressedDownKeys) {
+    this.currentState.handleKeyBoardInput(
+      pressedDownKeys,
+      this.player.keySettings
+    );
   }
 }

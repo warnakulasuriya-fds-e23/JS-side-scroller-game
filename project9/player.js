@@ -1,10 +1,11 @@
 import { PlayerMovementHandler } from "./PlayerMovementHandler.js";
 import { PlayerAnimationHandler } from "./playerAnimationHandler.js";
-import { PlayerStateController } from "./PlayerStateController.js";
+import { PlayerStateHandler } from "./PlayerStateHandler.js";
 import { PlayerParticleController } from "./PlayerParticleController.js";
 export class Player {
   constructor(game) {
     this.game = game;
+    this.keySettings = this.game.keyboardConfig.keySettings;
     this.spriteWidth = 100;
     this.spriteHeight = 91.3;
     this.posX = 0;
@@ -14,15 +15,12 @@ export class Player {
     this.playerEnergy = 200;
     this.playerMovementHandler = new PlayerMovementHandler(this);
     this.playerAnimationHandler = new PlayerAnimationHandler(this);
-    this.playerStateController = new PlayerStateController(this);
+    this.playerStateHandler = new PlayerStateHandler(this);
     this.playerParticleController = new PlayerParticleController(this);
   }
   update(pressedDownKeys, deltaTime) {
     //STATE HANDLING
-    this.playerStateController.currentState.handleKeyBoardInput(
-      pressedDownKeys,
-      this.game.keyboardConfig.keySettings
-    );
+    this.playerStateHandler.update(pressedDownKeys);
     this.playerMovementHandler.update(this, pressedDownKeys);
     this.playerAnimationHandler.update(deltaTime);
     this.playerParticleController.update();

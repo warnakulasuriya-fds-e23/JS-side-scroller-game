@@ -24,7 +24,7 @@ export class PlayerAnimationHandler {
   }
 
   animate() {
-    this.playerstate = this.player.playerStateController.currentState.state;
+    this.playerstate = this.player.playerStateHandler.currentState.state;
     this.maxFrames = totalFramesPerState[this.playerstate];
     if (this.frameTimer > this.frameInterval) {
       this.frameTimer = 0;
