@@ -3,6 +3,7 @@ import {
   EnergyComponent,
   ScoreComponent,
   TimeComponent,
+  HitPopup,
   PauseScreen,
 } from "./UIs.js";
 export class UIHandler {
@@ -15,9 +16,15 @@ export class UIHandler {
       new TimeComponent(game),
     ];
   }
+  addHitPopUp(enemy) {
+    this.currentlyActiveUIComponents.push(new HitPopup(enemy));
+  }
   update() {
-    this.currentlyActiveUIComponents.forEach((UIComp) => {
+    this.currentlyActiveUIComponents.forEach((UIComp, index) => {
       UIComp.update();
+      if (UIComp.markedForDeletion == true) {
+        this.currentlyActiveUIComponents.splice(index, 1);
+      }
     });
   }
   draw(context) {

@@ -171,7 +171,7 @@ export class Diving extends State {
     this.player = player;
   }
   activate() {
-    if (this.player.playerEnergyHandler.playerEnergy > 50) {
+    if (this.player.playerEnergyHandler.playerEnergy > 100) {
       this.player.playerEnergyHandler.singleShotAttack(this.state);
       this.player.playerAnimationHandler.frameY = 6;
       this.player.game.speedFraction = 1;

@@ -1,7 +1,7 @@
 const _SingleShotAttacks = ["DIVING"];
 const _FullAutoAttacks = ["ROLLING"];
 const SingleShotAttackCosts = {
-  DIVING: 50,
+  DIVING: 100,
 };
 const FullAutoAttackCosts = {
   ROLLING: 0.5,
@@ -16,7 +16,7 @@ export class PlayerEnergyHandler {
     this.playerEnergy = 200;
     this.maxEnergy = 200;
     this.energyPercent = (this.playerEnergy / this.maxEnergy) * 100;
-    this.regeneration = 0.25;
+    this.regeneration = 0.5;
   }
 
   singleShotAttack(currentStateName) {

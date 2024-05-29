@@ -9,10 +9,13 @@ export class CollisionHandler {
   increaseScoreAccordingToEnemy(enemy) {
     if (enemy.name == "Fly") {
       this.game.score += 1;
+      this.game.UIHandler.addHitPopUp(enemy);
     } else if (enemy.name == "Plant") {
       this.game.score += 2;
+      this.game.UIHandler.addHitPopUp(enemy);
     } else if (enemy.name == "Spider_Big") {
       this.game.score += 3;
+      this.game.UIHandler.addHitPopUp(enemy);
     }
   }
   collisionDetection() {

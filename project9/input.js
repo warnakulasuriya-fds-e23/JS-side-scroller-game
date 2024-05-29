@@ -4,7 +4,6 @@ export class InputHandler {
     this.keySettings = this.game.keyboardConfig.keySettings;
     this.keys = [];
     window.addEventListener("keydown", (e) => {
-      console.log(e.key);
       if (
         (e.key == this.keySettings["JUMP"] ||
           e.key == this.keySettings["CROUCH"] ||

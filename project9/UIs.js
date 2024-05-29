@@ -3,6 +3,7 @@ class UIComponent {
     this.game = game;
     this.player = game.player;
     this.verticalGap = 20;
+    this.markedForDeletion = false;
   }
 }
 
@@ -91,7 +92,7 @@ export class ScoreComponent extends UIComponent {
     context.textAlign = "left";
     context.fillStyle = this.fontColor;
     context.fillText("Score    :", 20, this.verticalGap * 3);
-    context.fillStyle = "#0099ff";
+    context.fillStyle = "#006bb3";
     context.fillText("<" + this.game.score + ">", 100, this.verticalGap * 3);
     context.restore();
   }
@@ -118,11 +119,54 @@ export class TimeComponent extends UIComponent {
     context.textAlign = "left";
     context.fillStyle = this.fontColor;
     context.fillText("Time      : ", 20, this.verticalGap * 4);
+    context.fillStyle = "#006bb3";
     context.fillText(
       "<" + this.timeToDisplay() + ">",
       100,
       this.verticalGap * 4
     );
+    context.restore();
+  }
+}
+
+export class HitPopup extends UIComponent {
+  constructor(enemy) {
+    super(enemy.game);
+    this.enemy = enemy;
+    this.fontSize = 150;
+    this.fontFamily = "Arial";
+    this.fontColor = "#006bb3";
+    this.spawnX = this.enemy.posX + this.enemy.spriteWidth;
+    this.spawnY = this.enemy.posY + this.enemy.spriteHeight;
+    this.posX = this.spawnX;
+    this.posY = this.spawnY;
+    this.xVleocity = 0;
+    this.yVleocity = -10;
+  }
+  PopUpValue() {
+    if (this.enemy.name == "Fly") {
+      return "+1";
+    } else if (this.enemy.name == "Plant") {
+      return "+2";
+    } else if (this.enemy.name == "Spider_Big") {
+      return "+3";
+    } else return "+NotDefined";
+  }
+  update() {
+    this.fontSize -= 5;
+    this.posX += this.xVleocity;
+    this.posY += this.yVleocity;
+    if (this.fontSize <= 5) {
+      this.markedForDeletion = true;
+    }
+  }
+  draw(context) {
+    console.log(this.posY);
+    context.save();
+    context.font = this.fontSize + "px " + this.fontFamily;
+    context.textAlign = "center";
+    context.fillStyle = this.fontColor;
+    context.fillText(this.PopUpValue(), this.posX, this.posY);
     context.restore();
   }
 }
