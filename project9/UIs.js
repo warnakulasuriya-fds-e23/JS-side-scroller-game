@@ -65,3 +65,5 @@ export class HealthComponenet extends UIComponent {
     context.restore();
   }
 }
+
+export class EnergyComponent extends UIComponent {}
