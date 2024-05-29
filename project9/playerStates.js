@@ -24,7 +24,7 @@ export class Sitting extends State {
     this.player.playerAnimationHandler.frameY = 5;
     this.player.game.speedFraction = 0;
   }
-  handleKeyBoardInput(pressedDownKeys, keySettings) {
+  update(pressedDownKeys, keySettings) {
     if (
       (pressedDownKeys.includes(keySettings["BACKWARD"]) ||
         pressedDownKeys.includes(keySettings["FORWARD"])) &&
@@ -55,7 +55,7 @@ export class Running extends State {
     this.player.playerAnimationHandler.frameY = 3;
     this.player.game.speedFraction = 1;
   }
-  handleKeyBoardInput(pressedDownKeys, keySettings) {
+  update(pressedDownKeys, keySettings) {
     if (pressedDownKeys.includes(keySettings["CROUCH"])) {
       this.player.playerStateHandler.setState(stateNums.SITTING);
     } else if (pressedDownKeys.includes(keySettings["JUMP"])) {
@@ -75,7 +75,7 @@ export class Jumping extends State {
     this.player.playerAnimationHandler.frameY = 1;
     this.player.game.speedFraction = 1;
   }
-  handleKeyBoardInput(pressedDownKeys, keySettings) {
+  update(pressedDownKeys, keySettings) {
     if (this.player.playerMovementHandler.yVelocity == 0) {
       this.player.playerStateHandler.setState(stateNums.FALLING);
     } else if (pressedDownKeys.includes(keySettings["ROLL"])) {
@@ -95,7 +95,7 @@ export class Falling extends State {
     this.player.playerAnimationHandler.frameY = 2;
     this.player.game.speedFraction = 1;
   }
-  handleKeyBoardInput(pressedDownKeys, keySettings) {
+  update(pressedDownKeys, keySettings) {
     if (this.player.onGround()) {
       if (pressedDownKeys.includes(keySettings["CROUCH"])) {
         this.player.playerStateHandler.setState(stateNums.SITTING);
@@ -120,7 +120,7 @@ export class Idling extends State {
     this.player.playerAnimationHandler.frameY = 0;
     this.player.game.speedFraction = 0;
   }
-  handleKeyBoardInput(pressedDownKeys, keySettings) {
+  update(pressedDownKeys, keySettings) {
     if (
       pressedDownKeys.includes(keySettings["BACKWARD"]) ||
       pressedDownKeys.includes(keySettings["FORWARD"])
@@ -143,7 +143,7 @@ export class Rolling extends State {
     this.player.playerAnimationHandler.frameY = 6;
     this.player.game.speedFraction = 1;
   }
-  handleKeyBoardInput(pressedDownKeys, keySettings) {
+  update(pressedDownKeys, keySettings) {
     if (!pressedDownKeys.includes(keySettings["ROLL"])) {
       if (this.player.onGround()) {
         this.player.playerStateHandler.setState(stateNums.RUNNING);
@@ -163,7 +163,7 @@ export class Diving extends State {
     this.player.playerAnimationHandler.frameY = 6;
     this.player.game.speedFraction = 1;
   }
-  handleKeyBoardInput(pressedDownKeys, keySettings) {
+  update(pressedDownKeys, keySettings) {
     if (this.player.onGround()) {
       if (!pressedDownKeys.includes(keySettings["ROLL"])) {
         this.player.playerParticleHandler.addSplashParticles();
@@ -184,7 +184,7 @@ export class GotHit extends State {
     this.player.playerAnimationHandler.frameY = 4;
     this.player.game.speedFraction = 0;
   }
-  handleKeyBoardInput(pressedDownKeys, keySettings) {
+  update(pressedDownKeys, keySettings) {
     if (this.player.playerAnimationHandler.frameX >= 10) {
       if (this.player.onGround()) {
         this.player.playerStateHandler.setState(stateNums.RUNNING);

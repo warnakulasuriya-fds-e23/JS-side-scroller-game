@@ -35,9 +35,6 @@ export class PlayerStateHandler {
   }
 
   update(pressedDownKeys) {
-    this.currentState.handleKeyBoardInput(
-      pressedDownKeys,
-      this.player.keySettings
-    );
+    this.currentState.update(pressedDownKeys, this.player.keySettings);
   }
 }

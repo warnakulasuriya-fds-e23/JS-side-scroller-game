@@ -19,7 +19,6 @@ export class Player {
     this.playerParticleHandler = new PlayerParticleHandler(this);
   }
   update(pressedDownKeys, deltaTime) {
-    //STATE HANDLING
     this.playerStateHandler.update(pressedDownKeys);
     this.playerMovementHandler.update(this, pressedDownKeys);
     this.playerAnimationHandler.update(deltaTime);
