@@ -1,4 +1,4 @@
-import { Movement } from "./Movement.js";
+import { PlayerMovementHandler } from "./PlayerMovementHandler.js";
 import { PlayerAnimationHandler } from "./playerAnimationHandler.js";
 import { PlayerStateController } from "./PlayerStateController.js";
 import { PlayerParticleController } from "./PlayerParticleController.js";
@@ -12,7 +12,7 @@ export class Player {
     this.spriteSheet = document.getElementById("playerSprites");
     this.playerHealth = 100;
     this.playerEnergy = 200;
-    this.movement = new Movement(game);
+    this.playerMovementHandler = new PlayerMovementHandler(this);
     this.playerAnimationHandler = new PlayerAnimationHandler(this);
     this.playerStateController = new PlayerStateController(this);
     this.playerParticleController = new PlayerParticleController(this);
@@ -23,15 +23,8 @@ export class Player {
       pressedDownKeys,
       this.game.keyboardConfig.keySettings
     );
-
-    //MOVEMENT HANDLING
-    this.movement.MotionHandling(this, pressedDownKeys);
-
-    //SPRITE ANIMATION HANDLING
-
+    this.playerMovementHandler.update(this, pressedDownKeys);
     this.playerAnimationHandler.update(deltaTime);
-
-    //PARTICLES HANDLING
     this.playerParticleController.update();
   }
 

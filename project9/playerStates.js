@@ -76,7 +76,7 @@ export class Jumping extends State {
     this.player.game.speedFraction = 1;
   }
   handleKeyBoardInput(pressedDownKeys, keySettings) {
-    if (this.player.movement.yVelocity == 0) {
+    if (this.player.playerMovementHandler.yVelocity == 0) {
       this.player.playerStateController.setState(stateNums.FALLING);
     } else if (pressedDownKeys.includes(keySettings["ROLL"])) {
       this.player.playerStateController.setState(stateNums.ROLLING);

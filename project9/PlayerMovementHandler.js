@@ -1,7 +1,8 @@
-export class Movement {
-  constructor(game) {
-    this.game = game;
-    this.keySettings = game.keyboardConfig.keySettings;
+export class PlayerMovementHandler {
+  constructor(player) {
+    this.player = player;
+    this.game = player.game;
+    this.keySettings = this.game.keyboardConfig.keySettings;
     this.xVelocity = 0;
     this.max_xVelocity = 10;
     this.yVelocity = 0;
@@ -88,7 +89,7 @@ export class Movement {
     this.boundaryHandling(player);
   }
 
-  MotionHandling(player, pressedDownKeys) {
+  update(player, pressedDownKeys) {
     this.horizontalMotion(player, pressedDownKeys);
     this.verticalMotion(player, pressedDownKeys);
   }
