@@ -24,6 +24,9 @@
 #enemy_plant,
 #enemy_spider_big,
 #fireSprite,
-#explosionSprite {
+#explosionSprite,
+#HealthPickupImage,
+#HealthStarImage,
+#SpeedBoostPickUpImage {
   display: none;
 }

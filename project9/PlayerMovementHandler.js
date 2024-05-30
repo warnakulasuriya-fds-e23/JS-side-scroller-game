@@ -69,7 +69,6 @@ export class PlayerMovementHandler {
   }
 
   interuptJump() {
-    console.log("Called");
     /*will be executed if the player releases the jump button
     intended effect of interrupting the jump midway, is to make it so that 
     the longer the user presses Jump the higher the character will jump*/
