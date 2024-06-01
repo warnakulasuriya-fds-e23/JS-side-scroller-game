@@ -5,8 +5,12 @@ export class PlayerHealthHandler {
     this.maxHealth = 100;
     this.HealthPercentage = (this.playerHealth / this.maxHealth) * 100;
   }
-  Heal(percent) {
-    this.playerHealth += percent * this.maxHealth;
+  Heal(amount) {
+    if (this.playerHealth + amount <= this.maxHealth) {
+      this.playerHealth += amount;
+    } else {
+      this.playerHealth = this.maxHealth;
+    }
   }
   update() {
     this.HealthPercentage = (this.playerHealth / this.maxHealth) * 100;

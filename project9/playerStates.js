@@ -40,7 +40,6 @@ export class Sitting extends State {
       pressedDownKeys.includes(keySettings["ROLL"]) &&
       !pressedDownKeys.includes(keySettings["CROUCH"])
     ) {
-      console.log("SITTING to ROLLING");
       this.player.playerStateHandler.setState(stateNums.ROLLING);
     }
   }

@@ -170,6 +170,45 @@ export class HitPopup extends UIComponent {
   }
 }
 
+export class HealthUpPopUp extends UIComponent {
+  constructor(pickUp) {
+    super(pickUp.game);
+    this.pickUp = pickUp;
+    this.fontSize = 150;
+    this.fontFamily = "Arial";
+    this.fontColor = "green";
+    this.spawnX =
+      this.pickUp.posX + this.pickUp.spriteWidth * this.pickUp.sizeModifier;
+    this.spawnY =
+      this.pickUp.posY + this.pickUp.spriteHeight * this.pickUp.sizeModifier;
+    this.posX = this.spawnX;
+    this.posY = this.spawnY;
+    this.xVleocity = 0;
+    this.yVleocity = -10;
+  }
+  PopUpValue() {
+    if (this.pickUp.name == "HealthPickUp") {
+      return "+30";
+    } else return "+NotDefined";
+  }
+  update() {
+    this.fontSize -= 5;
+    this.posX += this.xVleocity;
+    this.posY += this.yVleocity;
+    if (this.fontSize <= 5) {
+      this.markedForDeletion = true;
+    }
+  }
+  draw(context) {
+    context.save();
+    context.font = this.fontSize + "px " + this.fontFamily;
+    context.textAlign = "center";
+    context.fillStyle = this.fontColor;
+    context.fillText(this.PopUpValue(), this.posX, this.posY);
+    context.restore();
+  }
+}
+
 export class PauseScreen extends UIComponent {
   constructor(game) {
     super(game);

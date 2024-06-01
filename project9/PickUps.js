@@ -28,6 +28,9 @@ export class HealthPickUp extends PickUp {
     this.angle = 0;
     this.varyAngle = Math.random() * 0.1 + 0.1;
   }
+  UseOnPlayer() {
+    this.game.player.playerHealthHandler.Heal(30);
+  }
   update(deltaTime) {
     super.update();
     this.angle += this.varyAngle;

@@ -4,6 +4,7 @@ import {
   ScoreComponent,
   TimeComponent,
   HitPopup,
+  HealthUpPopUp,
   PauseScreen,
 } from "./UIs.js";
 export class UIHandler {
@@ -18,6 +19,9 @@ export class UIHandler {
   }
   addHitPopUp(enemy) {
     this.currentlyActiveUIComponents.push(new HitPopup(enemy));
+  }
+  addHealthUpPopUp(pickUp) {
+    this.currentlyActiveUIComponents.push(new HealthUpPopUp(pickUp));
   }
   update() {
     this.currentlyActiveUIComponents.forEach((UIComp, index) => {

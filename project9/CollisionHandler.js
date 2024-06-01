@@ -18,8 +18,13 @@ export class CollisionHandler {
       this.game.UIHandler.addHitPopUp(enemy);
     }
   }
-  collisionDetection() {
-    //player colliding with enemy detection
+  UsePicKUp(pickUp) {
+    if (pickUp.name == "HealthPickUp") {
+      pickUp.UseOnPlayer();
+      this.game.UIHandler.addHealthUpPopUp(pickUp);
+    }
+  }
+  playerCollisionWithEnemyDetection() {
     this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
       if (
         enemy.posX < this.player.posX + this.player.spriteWidth &&
@@ -42,7 +47,8 @@ export class CollisionHandler {
         }
       }
     });
-    //particles colliding with enemy detection
+  }
+  attackParticleCollisionWithEnemyDetection() {
     this.game.enemyHandler.currentlyActiveEnemies.forEach((enemy) => {
       this.player.playerParticleHandler.currentlyActiveParticles.forEach(
         (particle) => {
@@ -59,6 +65,24 @@ export class CollisionHandler {
         }
       );
     });
+  }
+  playerCollisionWithPickUpDetection() {
+    this.game.PickUpHandler.currentlyActivePickUps.forEach((pickUp) => {
+      if (
+        pickUp.posX < this.player.posX + this.player.spriteWidth &&
+        pickUp.posX > this.player.posX &&
+        pickUp.posY < this.player.posY + this.player.spriteHeight &&
+        pickUp.posY > this.player.posY
+      ) {
+        this.UsePicKUp(pickUp);
+        pickUp.markedForDeletion = true;
+      }
+    });
+  }
+  collisionDetection() {
+    this.playerCollisionWithEnemyDetection();
+    this.attackParticleCollisionWithEnemyDetection();
+    this.playerCollisionWithPickUpDetection();
   }
 
   update(deltaTime) {
