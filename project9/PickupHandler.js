@@ -20,7 +20,7 @@ export class PickUpHandler {
     }
 
     this.currentlyActivePickUps.forEach((pickUp, index) => {
-      pickUp.update();
+      pickUp.update(deltaTime);
       if (pickUp.markedForDeletion == true) {
         this.currentlyActivePickUps.splice(index, 1);
       }
