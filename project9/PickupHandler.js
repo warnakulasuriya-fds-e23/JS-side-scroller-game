@@ -1,24 +1,43 @@
-import { HealthPickUp } from "./PickUps.js";
+import { HealthPickUp, SpeedBoostPickUp } from "./PickUps.js";
 export class PickUpHandler {
   constructor(game) {
     this.game = game;
     this.currentlyActivePickUps = [];
-    this.pickUpTimer = 0;
-    this.pickUpInterval = 60000 * Math.random();
+    this.healthPickUpTimer = 0;
+    this.healthPickUpInterval = 60000 * Math.random();
+    this.speedBoostPickUpTimer = 0;
+    this.speedBoostPickUpInterval = 2000 * Math.random();
   }
-  update(deltaTime) {
+  healthPickUpSpawner(deltaTime) {
     let HealthPercent = this.game.player.playerHealthHandler.HealthPercentage;
-    this.pickUpTimer += deltaTime;
+
     if (
-      this.pickUpTimer > this.pickUpInterval &&
+      this.healthPickUpTimer > this.healthPickUpInterval &&
       Math.random() > 0.5 &&
       HealthPercent < 75
     ) {
-      this.pickUpTimer = 0;
-      this.pickUpInterval = 60000 * Math.random();
+      this.healthPickUpTimer = 0;
+      this.healthPickUpInterval = 60000 * Math.random();
       this.currentlyActivePickUps.push(new HealthPickUp(this.game));
+    } else {
+      this.healthPickUpTimer += deltaTime;
     }
-
+  }
+  speedBoostPickUpSpawner(deltaTime) {
+    if (
+      this.speedBoostPickUpTimer > this.speedBoostPickUpInterval &&
+      Math.random() > 0.5
+    ) {
+      this.speedBoostPickUpTimer = 0;
+      this.speedBoostPickUpInterval = 2000 * Math.random();
+      this.currentlyActivePickUps.push(new SpeedBoostPickUp(this.game));
+    } else {
+      this.speedBoostPickUpTimer += deltaTime;
+    }
+  }
+  update(deltaTime) {
+    this.healthPickUpSpawner(deltaTime);
+    this.speedBoostPickUpSpawner(deltaTime);
     this.currentlyActivePickUps.forEach((pickUp, index) => {
       pickUp.update(deltaTime);
       if (pickUp.markedForDeletion == true) {

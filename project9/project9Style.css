@@ -27,6 +27,7 @@
 #explosionSprite,
 #HealthPickupImage,
 #HealthStarImage,
-#SpeedBoostPickUpImage {
+#SpeedBoostPickUpImage,
+#SpeedBoostStarImage {
   display: none;
 }

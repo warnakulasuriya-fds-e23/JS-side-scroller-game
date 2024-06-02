@@ -22,6 +22,8 @@ export class CollisionHandler {
     if (pickUp.name == "HealthPickUp") {
       pickUp.UseOnPlayer();
       this.game.UIHandler.addHealthUpPopUp(pickUp);
+    } else if (pickUp.name == "SpeedBoostPickUp") {
+      pickUp.UseOnPlayer();
     }
   }
   playerCollisionWithEnemyDetection() {

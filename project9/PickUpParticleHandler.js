@@ -1,4 +1,4 @@
-import { HealthStar } from "./PickUpParticles.js";
+import { HealthStar, SpeedBoostStar } from "./PickUpParticles.js";
 
 export class PickUpParticleHandler {
   constructor(pickUp) {
@@ -8,8 +8,10 @@ export class PickUpParticleHandler {
     this.pickUpParticleInterval = 200;
   }
   addPickUpParticle() {
-    if ((this.pickUp.name = "HealthPickUp")) {
+    if (this.pickUp.name == "HealthPickUp") {
       this.currentlyActivePickUpParticles.push(new HealthStar(this.pickUp));
+    } else if (this.pickUp.name == "SpeedBoostPickUp") {
+      this.currentlyActivePickUpParticles.push(new SpeedBoostStar(this.pickUp));
     }
   }
   update(deltaTime) {
