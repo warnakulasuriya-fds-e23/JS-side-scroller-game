@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="project9Style.css" />
   </head>
   <body>
-    <img src="Assets/Images/Player/player.png" alt="" id="player" />
+    <img src="Assets/Images/Player/player.png" alt="" id="playerSprites" />
     <img src="Assets/Images/BackgroundLayers/layer-1.png" alt="" id="layer1" />
     <img src="Assets/Images/BackgroundLayers/layer-2.png" alt="" id="layer2" />
     <img src="Assets/Images/BackgroundLayers/layer-3.png" alt="" id="layer3" />
@@ -20,7 +20,30 @@
       alt=""
       id="enemy_spider_big"
     />
-    <canvas id="mainCanvas"></canvas>
+    <img src="Assets/Images/Particles/fire.png" alt="" id="fireSprite" />
+    <img src="Assets/Images/Effects/boom.png" alt="" id="explosionSprite" />
+    <img
+      src="Assets/Images/Pickups/HealthPickup.png"
+      alt=""
+      id="HealthPickupImage"
+    />
+    <img
+      src="Assets/Images/Pickups/HealthStar.png"
+      alt=""
+      id="HealthStarImage"
+    />
+    <img
+      src="Assets/Images/Pickups/SpeedBoostPickUp.png"
+      alt=""
+      id="SpeedBoostPickUpImage"
+    />
+    <img
+      src="Assets/Images/Pickups/SpeedBoostStar.png"
+      alt=""
+      id="SpeedBoostStarImage"
+    />
+
+    <canvas id="gameCanvas"></canvas>
     <script src="main.js" type="module"></script>
   </body>
 </html>

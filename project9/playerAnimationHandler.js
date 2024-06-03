@@ -4,9 +4,13 @@ const totalFramesPerState = {
   JUMPING: 7,
   FALLING: 7,
   IDLING: 7,
+  ROLLING: 7,
+  DIVING: 7,
+  GOTHIT: 11,
+  HYPERSPEED: 7,
 };
 
-export class PlayerSpriteSheetAnimations {
+export class PlayerAnimationHandler {
   constructor(player) {
     this.player = player;
     this.frameX = 0;
@@ -21,6 +25,8 @@ export class PlayerSpriteSheetAnimations {
   }
 
   animate() {
+    this.playerstate = this.player.playerStateHandler.currentState.state;
+    this.maxFrames = totalFramesPerState[this.playerstate];
     if (this.frameTimer > this.frameInterval) {
       this.frameTimer = 0;
       if (this.frameX < this.maxFrames - 1) this.frameX++;
@@ -28,5 +34,9 @@ export class PlayerSpriteSheetAnimations {
     } else {
       this.frameTimer += this.deltaTime;
     }
+  }
+  update(deltaTime) {
+    this.deltaTime = deltaTime;
+    this.animate();
   }
 }

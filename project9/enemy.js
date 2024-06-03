@@ -25,7 +25,7 @@ class Enemy {
     if (this.posX < 0 - this.spriteWidth) {
       this.markedForDeletion = true;
     }
-    if (this.posY < 0 - this.spirteHeight) {
+    if (this.posY < 0 - this.spriteHeight) {
       this.markedForDeletion = true;
     }
   }
@@ -36,7 +36,7 @@ class Enemy {
         this.posX,
         this.posY,
         this.spriteWidth,
-        this.spirteHeight
+        this.spriteHeight
       );
     }
     //the properties utilized here will be accessed from the child class in which the update method is called
@@ -45,11 +45,11 @@ class Enemy {
       this.frameX * this.spriteWidth,
       0, //cuz enemies have only one row in their sprite sheet
       this.spriteWidth,
-      this.spirteHeight,
+      this.spriteHeight,
       this.posX,
       this.posY,
       this.spriteWidth,
-      this.spirteHeight
+      this.spriteHeight
     );
   }
 }
@@ -65,8 +65,9 @@ class FlyingEnemy extends Enemy {
 export class Fly extends FlyingEnemy {
   constructor(game) {
     super(game);
+    this.name = "Fly";
     this.spriteWidth = 60;
-    this.spirteHeight = 44;
+    this.spriteHeight = 44;
     this.posX = this.spawnX; //starts at spawn point
     this.posY = this.spawnY; //starts at "" ""
     this.xVelocity = -1 + Math.random() * -3;
@@ -93,10 +94,11 @@ class GroundEnemy extends Enemy {
 export class Plant extends GroundEnemy {
   constructor(game) {
     super(game);
+    this.name = "Plant";
     this.spriteWidth = 60;
-    this.spirteHeight = 87;
+    this.spriteHeight = 87;
     this.enemyImage = document.getElementById("enemy_plant");
-    this.spawnY = game.height - game.groundMargin - this.spirteHeight;
+    this.spawnY = game.height - game.groundMargin - this.spriteHeight;
     this.posX = this.spawnX;
     this.posY = this.spawnY;
     this.totalspriteFrames = 2;
@@ -118,8 +120,9 @@ class ClimbingEnemy extends Enemy {
 export class Spider_Big extends ClimbingEnemy {
   constructor(game) {
     super(game);
+    this.name = "Spider_Big";
     this.spriteWidth = 120;
-    this.spirteHeight = 144;
+    this.spriteHeight = 144;
     this.posX = this.spawnX;
     this.posY = this.spawnY;
     this.enemyImage = document.getElementById("enemy_spider_big");
@@ -129,7 +132,7 @@ export class Spider_Big extends ClimbingEnemy {
     super.update(deltaTime);
     if (
       this.posY >
-      this.game.height - this.game.groundMargin - this.spirteHeight
+      this.game.height - this.game.groundMargin - this.spriteHeight
     ) {
       this.yVelocity = -1;
     }
