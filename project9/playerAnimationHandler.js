@@ -7,6 +7,7 @@ const totalFramesPerState = {
   ROLLING: 7,
   DIVING: 7,
   GOTHIT: 11,
+  HYPERSPEED: 7,
 };
 
 export class PlayerAnimationHandler {

@@ -7,18 +7,19 @@ export const stateNums = {
   ROLLING: 5,
   DIVING: 6,
   GOTHIT: 7,
+  HYPERSPEED: 8,
 };
 
 class State {
-  constructor(state) {
+  constructor(player, state) {
+    this.player = player;
     this.state = state;
   }
 }
 
 export class Sitting extends State {
   constructor(player) {
-    super("SITTING");
-    this.player = player;
+    super(player, "SITTING");
   }
   activate() {
     this.player.playerAnimationHandler.frameY = 5;
@@ -47,8 +48,7 @@ export class Sitting extends State {
 
 export class Running extends State {
   constructor(player) {
-    super("RUNNING");
-    this.player = player;
+    super(player, "RUNNING");
   }
   activate() {
     this.player.playerAnimationHandler.frameY = 3;
@@ -67,8 +67,7 @@ export class Running extends State {
 
 export class Jumping extends State {
   constructor(player) {
-    super("JUMPING");
-    this.player = player;
+    super(player, "JUMPING");
   }
   activate() {
     this.player.playerAnimationHandler.frameY = 1;
@@ -87,8 +86,7 @@ export class Jumping extends State {
 
 export class Falling extends State {
   constructor(player) {
-    super("FALLING");
-    this.player = player;
+    super(player, "FALLING");
   }
   activate() {
     this.player.playerAnimationHandler.frameY = 2;
@@ -112,8 +110,7 @@ export class Falling extends State {
 // so far idling has not been used yet but im keeping it just in case
 export class Idling extends State {
   constructor(player) {
-    super("IDLING");
-    this.player = player;
+    super(player, "IDLING");
   }
   activate() {
     this.player.playerAnimationHandler.frameY = 0;
@@ -135,8 +132,7 @@ export class Idling extends State {
 
 export class Rolling extends State {
   constructor(player) {
-    super("ROLLING");
-    this.player = player;
+    super(player, "ROLLING");
   }
   activate() {
     if (this.player.playerEnergyHandler.playerEnergy > 20) {
@@ -166,8 +162,7 @@ export class Rolling extends State {
 
 export class Diving extends State {
   constructor(player) {
-    super("DIVING");
-    this.player = player;
+    super(player, "DIVING");
   }
   activate() {
     if (this.player.playerEnergyHandler.playerEnergy > 100) {
@@ -196,8 +191,7 @@ export class Diving extends State {
 
 export class GotHit extends State {
   constructor(player) {
-    super("GOTHIT");
-    this.player = player;
+    super(player, "GOTHIT");
   }
   activate() {
     this.player.playerAnimationHandler.frameY = 4;
@@ -212,4 +206,15 @@ export class GotHit extends State {
       }
     }
   }
+}
+
+export class HyperSpeed extends State {
+  constructor(player) {
+    super(player, "HYPERSPEED");
+  }
+  activate() {
+    this.player.playerAnimationHandler.frameY = 6;
+    this.player.game.speedFraction = 10;
+  }
+  update(pressedDownKeys, keySettings) {}
 }

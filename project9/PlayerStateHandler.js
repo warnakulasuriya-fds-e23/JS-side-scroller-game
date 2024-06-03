@@ -8,6 +8,7 @@ import {
   Rolling,
   Diving,
   GotHit,
+  HyperSpeed,
 } from "./playerStates.js";
 
 export class PlayerStateHandler {
@@ -22,6 +23,7 @@ export class PlayerStateHandler {
       new Rolling(player),
       new Diving(player),
       new GotHit(player),
+      new HyperSpeed(player),
     ];
     this.stateNums = stateNums;
     this.previousState = this.states[4];

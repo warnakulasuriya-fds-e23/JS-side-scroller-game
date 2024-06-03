@@ -72,7 +72,9 @@ export class PlayerMovementHandler {
     /*will be executed if the player releases the jump button
     intended effect of interrupting the jump midway, is to make it so that 
     the longer the user presses Jump the higher the character will jump*/
-    this.yVelocity = 0;
+    if (this.player.playerStateHandler.currentState.state == "JUMPING") {
+      this.yVelocity = 0;
+    }
   }
   //PLEASE NOTE!! : here we are dealing with an inverted y-axis
   verticalMotion(player, pressedDownKeys) {

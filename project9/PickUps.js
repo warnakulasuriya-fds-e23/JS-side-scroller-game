@@ -1,4 +1,5 @@
 import { PickUpParticleHandler } from "./PickUpParticleHandler.js";
+import { stateNums } from "./playerStates.js";
 class PickUp {
   constructor(game, name) {
     this.name = name;
@@ -72,7 +73,7 @@ export class SpeedBoostPickUp extends PickUp {
     this.varyAngle = Math.random() * 0.1 + 0.1;
   }
   UseOnPlayer() {
-    this.game.player.playerHealthHandler.Heal(30);
+    this.game.player.playerStateHandler.setState(stateNums["HYPERSPEED"]);
   }
   update(deltaTime) {
     super.update();

@@ -38,7 +38,8 @@ export class CollisionHandler {
         this.collisionAnimationHandler.addExplosionCollision(enemy);
         if (
           this.player.playerStateHandler.currentState.state == "ROLLING" ||
-          this.player.playerStateHandler.currentState.state == "DIVING"
+          this.player.playerStateHandler.currentState.state == "DIVING" ||
+          this.player.playerStateHandler.currentState.state == "HYPERSPEED"
         ) {
           this.increaseScoreAccordingToEnemy(enemy);
         } else {
