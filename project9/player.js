@@ -23,7 +23,7 @@ export class Player {
   }
   update(pressedDownKeys, deltaTime) {
     this.playerStateHandler.update(pressedDownKeys);
-    this.playerMovementHandler.update(this, pressedDownKeys);
+    this.playerMovementHandler.update(pressedDownKeys);
     this.playerAnimationHandler.update(deltaTime);
     this.playerEnergyHandler.update();
     this.playerHealthHandler.update();
