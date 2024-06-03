@@ -96,3 +96,9 @@ export class SplashParticle extends Particle {
     );
   }
 }
+
+export class VerticalShockWave extends Particle {
+  constructor(player) {
+    super(player);
+  }
+}
