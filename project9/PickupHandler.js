@@ -26,6 +26,8 @@ export class PickUpHandler {
   speedBoostPickUpSpawner(deltaTime) {
     if (
       this.speedBoostPickUpTimer > this.speedBoostPickUpInterval &&
+      this.game.speedFraction > 0 &&
+      this.game.player.playerStateHandler.currentState.state != "HYPERSPEED" &&
       Math.random() > 0.5
     ) {
       this.speedBoostPickUpTimer = 0;
