@@ -223,7 +223,7 @@ export class PauseScreen extends UIComponent {
     context.font = this.fontSize + "px " + this.fontFamily;
     context.textAlign = "center";
     context.fillStyle = this.fontColor;
-    context.fillText("-PAUSED-", 250, 300);
+    context.fillText("-PAUSED-", 500, 300);
     context.restore();
   }
 }
