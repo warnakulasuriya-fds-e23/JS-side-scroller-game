@@ -30,6 +30,7 @@ class Enemy {
     }
   }
   draw(context) {
+    context.save();
     if (this.game.debugMode) {
       context.strokeStyle = "red";
       context.strokeRect(
@@ -51,6 +52,7 @@ class Enemy {
       this.spriteWidth,
       this.spriteHeight
     );
+    context.restore();
   }
 }
 

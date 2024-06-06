@@ -42,6 +42,9 @@ export class PlayerMovementHandler {
       this.max_xVelocity = 20;
     }
   }
+  midAirMovement() {
+    this.player.posY = this.game.height / 2;
+  }
   horizontalMotion(pressedDownKeys) {
     if (this.player.playerStateHandler.currentState.state == "ROLLING") {
       this.setPlayerSpeedMode("FAST");
@@ -78,23 +81,27 @@ export class PlayerMovementHandler {
   }
   //PLEASE NOTE!! : here we are dealing with an inverted y-axis
   verticalMotion(pressedDownKeys) {
-    if (this.player.playerStateHandler.currentState.state == "DIVING") {
-      this.yVelocity = 40;
-    } else if (
-      pressedDownKeys.includes(this.keySettings["JUMP"]) &&
-      this.player.onGround() &&
-      !pressedDownKeys.includes(this.keySettings["CROUCH"])
-    ) {
-      this.yVelocity = -28;
+    if (this.player.playerStateHandler.currentState.state != "HYPERSPEED") {
+      if (this.player.playerStateHandler.currentState.state == "DIVING") {
+        this.yVelocity = 40;
+      } else if (
+        pressedDownKeys.includes(this.keySettings["JUMP"]) &&
+        this.player.onGround() &&
+        !pressedDownKeys.includes(this.keySettings["CROUCH"])
+      ) {
+        this.yVelocity = -28;
+      }
+
+      this.player.posY += this.yVelocity; //motion along y axis
+
+      if (!this.player.onGround()) {
+        this.yVelocity += this.g; //the is deceleration taking place (the g is added and not subtracted because y axis is inverted)
+      } else this.yVelocity = 0; //final velocity (stops player from falling through the floor)
+
+      this.boundaryHandling();
+    } else {
+      this.midAirMovement();
     }
-
-    this.player.posY += this.yVelocity; //motion along y axis
-
-    if (!this.player.onGround()) {
-      this.yVelocity += this.g; //the is deceleration taking place (the g is added and not subtracted because y axis is inverted)
-    } else this.yVelocity = 0; //final velocity (stops player from falling through the floor)
-
-    this.boundaryHandling();
   }
 
   update(pressedDownKeys) {

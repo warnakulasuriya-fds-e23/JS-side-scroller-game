@@ -29,6 +29,7 @@ export class PlayerStateHandler {
     this.previousState = this.states[4];
     this.currentState = this.states[0];
     this.currentState.activate();
+    this.deltaTime = 0;
   }
   setState(stateNum) {
     this.previousState = this.currentState;
@@ -36,7 +37,8 @@ export class PlayerStateHandler {
     this.currentState.activate();
   }
 
-  update(pressedDownKeys) {
+  update(pressedDownKeys, deltaTime) {
+    this.deltaTime = deltaTime;
     this.currentState.update(pressedDownKeys, this.player.keySettings);
   }
 }

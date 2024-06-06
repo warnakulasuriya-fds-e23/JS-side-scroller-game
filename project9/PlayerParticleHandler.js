@@ -2,6 +2,7 @@ import {
   DustParticle,
   FireParticle,
   SplashParticle,
+  VerticalShockWave,
 } from "./PlayerParticles.js";
 
 export class PlayerParticleHandler {
@@ -9,6 +10,7 @@ export class PlayerParticleHandler {
     this.player = player;
     this.currentlyActiveParticles = [];
     this.maxParticles = 100;
+    this.deltaTime = 0;
   }
   clearCurrentParticles() {
     this.currentlyActiveParticles.splice(
@@ -29,11 +31,19 @@ export class PlayerParticleHandler {
       this.currentlyActiveParticles.unshift(new SplashParticle(this.player));
     }
   }
-  update() {
+  addVerticalShockWave() {
+    this.currentlyActiveParticles.unshift(new VerticalShockWave(this.player));
+  }
+  update(deltaTime) {
+    this.deltaTime = deltaTime;
     if (this.player.playerStateHandler.currentState.state == "RUNNING") {
       this.addDustParticle();
     } else if (this.player.playerStateHandler.currentState.state == "ROLLING") {
       this.addFireParticle();
+    } else if (
+      this.player.playerStateHandler.currentState.state == "HYPERSPEED"
+    ) {
+      this.addVerticalShockWave();
     }
 
     if (this.currentlyActiveParticles.length > this.maxParticles) {

@@ -22,15 +22,16 @@ export class Player {
     this.playerParticleHandler = new PlayerParticleHandler(this);
   }
   update(pressedDownKeys, deltaTime) {
-    this.playerStateHandler.update(pressedDownKeys);
+    this.playerStateHandler.update(pressedDownKeys, deltaTime);
     this.playerMovementHandler.update(pressedDownKeys);
     this.playerAnimationHandler.update(deltaTime);
     this.playerEnergyHandler.update();
     this.playerHealthHandler.update();
-    this.playerParticleHandler.update();
+    this.playerParticleHandler.update(deltaTime);
   }
 
   draw(context) {
+    context.save();
     if (this.game.debugMode) {
       context.strokeStyle = "blue";
       context.strokeRect(
@@ -51,6 +52,7 @@ export class Player {
       this.spriteWidth,
       this.spriteHeight
     );
+    context.restore();
 
     this.playerParticleHandler.draw(context);
   }
