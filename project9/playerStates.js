@@ -224,7 +224,6 @@ export class HyperSpeed extends State {
       this.player.playerStateHandler.setState(stateNums.FALLING);
     } else if (this.player.playerStateHandler.deltaTime != null) {
       this.timer += this.player.playerStateHandler.deltaTime;
-      console.log(this.timer);
     }
   }
 }
