@@ -139,6 +139,7 @@ export class VerticalShockWave extends Particle {
     this.posY = this.particleSpawnY;
     this.xVelocity = -10;
     this.yVelocity = -40;
+    this.size = this.spriteHeight * this.sizeModifier; //need this in collision handler to handle enemy collision with shockwave
 
     //following properties will be used for animating the shockwave
     this.frameX = 0;
@@ -190,6 +191,7 @@ export class VerticalShockWave extends Particle {
       this.player.game.maxSpeed * this.player.game.speedFraction;
     this.posY += this.yVelocity;
     this.sizeModifier += 0.14;
+    this.size = this.spriteHeight * this.sizeModifier;
     this.animate();
     this.speedLineUpdateHandler();
     if (this.sizeModifier > 1.3) {

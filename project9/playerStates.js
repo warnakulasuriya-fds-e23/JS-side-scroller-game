@@ -212,7 +212,7 @@ export class HyperSpeed extends State {
   constructor(player) {
     super(player, "HYPERSPEED");
     this.timer = 0;
-    this.timeLimit = 5000;
+    this.timeLimit = 7000;
   }
   activate() {
     this.player.playerAnimationHandler.frameY = 6;
