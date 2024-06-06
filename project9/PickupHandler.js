@@ -6,7 +6,7 @@ export class PickUpHandler {
     this.healthPickUpTimer = 0;
     this.healthPickUpInterval = 60000 * Math.random();
     this.speedBoostPickUpTimer = 0;
-    this.speedBoostPickUpInterval = 2000 * Math.random();
+    this.speedBoostPickUpInterval = 120000 * Math.random();
   }
   healthPickUpSpawner(deltaTime) {
     let HealthPercent = this.game.player.playerHealthHandler.HealthPercentage;
@@ -29,7 +29,7 @@ export class PickUpHandler {
       Math.random() > 0.5
     ) {
       this.speedBoostPickUpTimer = 0;
-      this.speedBoostPickUpInterval = 2000 * Math.random();
+      this.speedBoostPickUpInterval = 120000 * Math.random();
       this.currentlyActivePickUps.push(new SpeedBoostPickUp(this.game));
     } else {
       this.speedBoostPickUpTimer += deltaTime;
