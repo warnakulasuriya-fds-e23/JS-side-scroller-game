@@ -28,6 +28,7 @@
 #HealthPickupImage,
 #HealthStarImage,
 #SpeedBoostPickUpImage,
-#SpeedBoostStarImage {
+#SpeedBoostStarImage,
+#fireRingSpriteSheet {
   display: none;
 }
