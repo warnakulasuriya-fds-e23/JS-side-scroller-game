@@ -17,7 +17,7 @@ this project was done using vanilla javascript mainly, and also some html and cs
 - clone this repositry
 - open up the project9.html file and thats it !
   
-#keyBoard controls
+## keyBoard controls
 
 | Action       | Key                               |
 |-------------:|-----------------------------------|
@@ -28,6 +28,6 @@ this project was done using vanilla javascript mainly, and also some html and cs
 |  Dive Bomb   | Arrow Down (while in air)         |
 |  Roll Attack | r                                 |
 
-#preview images
+## preview images
 basic game appearence
 ![gameplay screenshot 1](https://github.com/warnakulasuriya-fds-e23/JS-side-scroller-game/assets/145958660/8274cae2-507a-4324-807f-6978c9aa1d2a)
