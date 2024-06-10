@@ -5,7 +5,7 @@ https://youtu.be/GFO_txvwK_c?si=BY83kCfeHMJjf0ih
 
 this tutorial was done by [@Frankslaboratory](https://www.youtube.com/c/Frankslaboratory)
 
-👌**_Highly recommended if you want get better at OOP_**
+**👌_Highly recommended if you want get better at OOP_**
 
 what i did additionally:
 - i addded some of my own features into it. (health bar, power ups, etc)
