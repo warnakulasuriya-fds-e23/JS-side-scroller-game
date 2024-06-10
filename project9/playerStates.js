@@ -211,10 +211,19 @@ export class GotHit extends State {
 export class HyperSpeed extends State {
   constructor(player) {
     super(player, "HYPERSPEED");
+    this.timer = 0;
+    this.timeLimit = 7000;
   }
   activate() {
     this.player.playerAnimationHandler.frameY = 6;
     this.player.game.speedFraction = 10;
   }
-  update(pressedDownKeys, keySettings) {}
+  update(pressedDownKeys, keySettings) {
+    if (this.timer > this.timeLimit) {
+      this.timer = 0;
+      this.player.playerStateHandler.setState(stateNums.FALLING);
+    } else if (this.player.playerStateHandler.deltaTime != null) {
+      this.timer += this.player.playerStateHandler.deltaTime;
+    }
+  }
 }
