@@ -13,5 +13,10 @@ what i did additionally:
 
 so this code is not a one to one match of the original project. If you want the original project you might as well watch the video 😂
 
+this project was done using vanilla javascript mainly, and also some html and css. So if you want to try this out,
+- clone this repositry
+- open up the project9.html file and thats it !
+
+
 basic game appearence
 ![gameplay screenshot 1](https://github.com/warnakulasuriya-fds-e23/JS-side-scroller-game/assets/145958660/8274cae2-507a-4324-807f-6978c9aa1d2a)
