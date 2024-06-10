@@ -4,11 +4,13 @@ This was made by following the free code camp tutorial at the following link
 https://youtu.be/GFO_txvwK_c?si=BY83kCfeHMJjf0ih
 
 this tutorial was done by [@Frankslaboratory](https://www.youtube.com/c/Frankslaboratory)
-## Highly recommended if you want get better at OOP
+
+👌**_Highly recommended if you want get better at OOP_**
 
 what i did additionally:
 - i addded some of my own features into it. (health bar, power ups, etc)
 - i made the code as CLEAN as i could understand
+
 so this code is not a one to one match of the original project. If you want the original project you might as well watch the video 😂
 
 basic game appearence
